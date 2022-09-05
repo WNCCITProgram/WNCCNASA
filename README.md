@@ -1,5 +1,6 @@
 # WNCC NASA NeSpaceGrant.org
-- Respository for Western Nebraska Community College NASA Nebraska Space Grant Student Fellowships
+- These projects are supported by the Nebraska SpaceGrant https://www.nespacegrant.org
+- This is the pespository for Western Nebraska Community College NASA Nebraska Space Grant Student Fellowships
 - This is part of an ongoing project sponsored by the Nebraska Space Grant
   - Enhancing Computer Science Curriculum using off-the-shelf Robotics Kits to Increase Whole Brain Learning
 # NASA Fellowships 22-23
