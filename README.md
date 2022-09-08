@@ -22,7 +22,7 @@ This year it is all about Virtual Reality with Unity.
   - https://gopigo3.readthedocs.io/en/latest
   - https://di-sensors.readthedocs.io/en/latest
 - Programming Resources (General programming resources)
-- Video Streaming --> This folder contains tutorials and programs that use the Python picamera library to take stills and stream video
+- Video Streaming --> Folder with tutorials and programs that use the Python OpenCV-Python library to take stills and stream video
 ### Resources --> Code Examples --> Sensors Folder contains sensor tutorial and code
 - GoPiGo3 Sensors Tutorial
 - sensor_distance_test.py --> Read the Dexter distance sensor in inches and mm to the console
