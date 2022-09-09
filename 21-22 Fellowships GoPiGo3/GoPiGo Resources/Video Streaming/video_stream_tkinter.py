@@ -4,26 +4,16 @@
     Created: 09/08/22
     Purpose: Stream video to a Tkinter interface
 """
-
-# start with this
-# sudo sudo pip3 install opencv-python
-# sudo apt-get install python-imaging-tk
+# sudo pip3 install opencv-python
+# sudo pip3 install pillow -U
 # sudo apt-get install libatlas-base-dev
-
-
-# sudo apt-get install libcblas-dev
-# sudo apt-get install libhdf5-dev
-# sudo apt-get install libhdf5-serial-dev
-# sudo apt-get install libjasper-dev
-# sudo apt-get install libqtgui4
-# sudo apt-get install libqt4-test
-
-# I don't think this is needed, sudo apt-get install python-opencv
+# sudo pip3 install numpy -Y
 
 import tkinter as tk
 import tkinter.ttk as ttk
 import numpy as np
-from PIL import Image, ImageTk
+from PIL import Image
+from PIL import ImageTk
 import cv2
 
 
@@ -68,7 +58,8 @@ class VideoStar():
                     break
 
         except Exception as e:
-            print(f"{e}")
+            pass
+            # print(f"{e}")
 
     def create_widgets(self):
         # Label to display video stream
