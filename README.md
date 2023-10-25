@@ -4,6 +4,10 @@
 - This is part of an ongoing project sponsored by the Nebraska Space Grant
   - Enhancing Computer Science Curriculum using off-the-shelf Robotics Kits to Increase Whole Brain Learning
 
+## Astronomy Photos by Tom Robinson
+
+Tom Robinson, astronomy instructor at WNCC, made these photos available to us for use as Unity Assets.
+
 # NASA Fellowships 23-24
 
 ## Virtual Reality simulations with Unity
