@@ -20,6 +20,7 @@ Tom Robinson, astronomy instructor at WNCC, made these photos available to us fo
 
 - 09/07/2023 - [Gus playing golf](https://www.facebook.com/wnccitprogram)
 - 09/07/2023 - [Tour of Isaacs Room](https://youtu.be/DU64BSgh7Vk)
+- 12/30/2023 - [Tour of Gus' Project](https://youtu.be/7ac5SFJFNlk)
 
 ## Analog meets Digital
 We are working on 3D printing projects to be painted with acrylic paints. This is in cooperation with the Art program.
