@@ -1,4 +1,4 @@
-8/21/24 
+### 8/21/24 
 Today I began reading through the grant acceptance requirements—uploaded photo and biography.  
 I signed up for ORCiD, The NASA STEM Gateway, Documented the progress reporting due dates and 
 anticipated final report date.  I added the Nebraska Academy of Sciences presentation date to my 
@@ -6,17 +6,41 @@ list of travel dates for the academic year and discussed the absence with profes
 GoPiGo today.  I accessed a github repository for my project.  And I created this journal to help 
 document my progress that will be included in the progress reports. 
 
-8/27/24 
+### 8/27/24 
 I uploaded my birth certificate and accepted the grant.  I charged Rover1’s battery. I added the 
 Nebraska NASA Space Grant to my ORCiD account. I began attempting to install OS on RaspberryPi but had some techincal difficulties.
 
-8/28/24  
+### 8/28/24  
 Meeting with advisor from 12-1pm, still having technical difficulties.  Checked firewall and antivirus settings on computer.  Cannot connect with PuTTY. 
 
-9/12/24
+### 9/12/24
+Installed Raspberry Pi OS Bullseye
 Booted and connected to device by SSH and updated configuration settings.
 Updated Raspberry Pi OS
 Disabled Onboard Wi-Fi, added SSIDs for school and home.
 Setup GoPiGo3 Software
-*****************************
-Spent the morning installing the OS on Raspberry Pi, configuring the network settings, 
+Setup TigerVNC Viewer
+Setup a Gmail Account for Email
+Sent Email IP Address
+
+
+### 9/18/24
+Received:
+Grove BME680 Sensor (Temp, Humidity, Pressure, Gas)
+camera
+infrared receiver
+distance sensor
+infrared remote control
+Named my GoPiGo -- PiOneer
+added code to move PiOneer with keyboard
+PiOneer moves
+3D printed sensor attachments
+3D printed camera attachment
+3D printed infrared remote case
+
+### 9/25/24
+research sensors
+created ThingSpeak.com account
+
+### 10/2/24
+
