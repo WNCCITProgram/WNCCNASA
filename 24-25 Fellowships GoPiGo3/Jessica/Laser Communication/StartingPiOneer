@@ -1,0 +1,4 @@
+cmd: ipconfig /all
+zenmap: ping scan network
+PuTTy: use IP address to log in, log into PiOneer
+TigerVNC: log in using ip address
