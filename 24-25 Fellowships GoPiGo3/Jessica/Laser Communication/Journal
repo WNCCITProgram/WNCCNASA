@@ -43,4 +43,10 @@ research sensors
 created ThingSpeak.com account
 
 ### 10/2/24
+created a guide to remember how to log into PiOneer
+updated TigerVNC
+added seconds to clock
+added temperature monitor with warnings at 60 and 80 degrees
+set desktop shortcuts to open without prompt
+configured wavemon to monitor wi-fi signal strength in real time
 
