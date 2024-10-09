@@ -4,9 +4,9 @@ zenmap: ping scan network
 PuTTy: use IP address to log in, log into PiOneer
 TigerVNC: log in using ip address
 To monitor wi-fi run cmd in TigerVNC 
-# run wavemon
+* run wavemon
 wavemon
-# quit wavemon
+* quit wavemon
 q
 
 
@@ -20,3 +20,16 @@ SAVE
 remember when you make changes to update to visual studio code**
 ------------------------------------------------------------
 dont run from code editor, run from the terminal
+
+ls  = list folders
+cd = change directory (opens folder) so... cd Code
+ls = what is in Code folder
+python3 (interpreter) then new_file.py so.. python3 new_file.py
+-----------------------------------------------------------
+run the program:
+open terminal
+python3 new_file.py
+
+
+
+
