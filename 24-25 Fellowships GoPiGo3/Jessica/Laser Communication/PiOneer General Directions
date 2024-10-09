@@ -1,0 +1,22 @@
+# Starting PiOneer
+cmd: ipconfig /all
+zenmap: ping scan network
+PuTTy: use IP address to log in, log into PiOneer
+TigerVNC: log in using ip address
+To monitor wi-fi run cmd in TigerVNC 
+# run wavemon
+wavemon
+# quit wavemon
+q
+
+
+# create an empty file in code folder in TigerVNC
+------------------------------------------------------------
+click pi foler > Code folder -> create new_file.py
+right click file, click Geany programmers editor
+------------------------------------------------------------
+once new_file.py is open, copy/paste from github(click raw*) into Geany
+SAVE
+remember when you make changes to update to visual studio code**
+------------------------------------------------------------
+dont run from code editor, run from the terminal
