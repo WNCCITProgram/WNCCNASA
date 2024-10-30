@@ -1,3 +1,6 @@
+username: pi
+password: Password01
+
 # Starting PiOneer
 cmd: ipconfig /all
 zenmap: ping scan network
