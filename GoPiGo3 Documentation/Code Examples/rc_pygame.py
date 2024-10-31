@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#############################################################################################################
+############################################################################
 # Basic example for controlling the GoPiGo using the Keyboard
 # Contributed by casten on Gitub https://github.com/DexterInd/GoPiGo/pull/112
 #
@@ -24,17 +24,18 @@
 # History
 # ------------------------------------------------
 # Author        Date            Comments
-# Loring        04/28/18        Ported from GoPiG, converted to GoPiGo3
+# Loring        04/28/18        Ported from GoPiGo, converted to GoPiGo3
 # Loring        09/06/21        Converted to Python3
 # Loring        09/24/21        Refactored to OOP
 
-##############################################################################################################
+############################################################################
 # Includes the basic functions for controlling the GoPiGo Robot
 import easygopigo3 as easy  # Import the GoPiGo library
 import atexit               # Used for stopping the GoPiGo when closing the running program
 import os                   # For placement of the pygame window
 import sys                  # For sys.exit
 import pygame               # Gives access to KEYUP/KEYDOWN events
+
 
 class RemoteControlGUI:
     """ Remote control class  """
@@ -80,7 +81,7 @@ class RemoteControlGUI:
         # Fill the background with black
         self.background.fill(self.BLACK)
 
-#--------------------------------- DISPLAY INSTRUCTIONS -------------------------------------#
+# -------------------------- DISPLAY INSTRUCTIONS ------------------------ #
     def display_instructions(self):
         """ Create and display instructions for the GUI """
         # Create instructions for remote control of the robot
@@ -128,7 +129,7 @@ class RemoteControlGUI:
         # Update the screen from the screen backbuffer
         pygame.display.update()
 
-#--------------------------------- INCREASE SPEED -------------------------------------#
+# ----------------------- INCREASE SPEED --------------------------------- #
     def increase_speed(self):
         """ Increase the speed of the GoPiGo """
         # Get the current speed
@@ -136,7 +137,7 @@ class RemoteControlGUI:
         # Add 100 to the current speed
         speed = speed + 100
         # Keep speed from going beyond 1000
-        if(speed > 1000):
+        if (speed > 1000):
             speed = 1000
         # Set the new speed
         self.gpg.set_speed(speed)
@@ -153,7 +154,7 @@ class RemoteControlGUI:
             (10, 300)         # x, y coordinates
         )
 
-#--------------------------------- DECREASE SPEED -------------------------------------#
+# ------------------------- DECREASE SPEED -------------------------------- #
     def decrease_speed(self):
         """ Decrease the speed of the GoPiGo """
         # Get current speed
@@ -161,7 +162,7 @@ class RemoteControlGUI:
         # Subtract 100 from the current speed
         speed = speed - 100
         # Keep speed from going below 0
-        if(speed < 0):
+        if (speed < 0):
             speed = 0
         # Set the speed
         self.gpg.set_speed(speed)
@@ -172,7 +173,7 @@ class RemoteControlGUI:
         self.window.blit(self.background, (0, 0))
         self.window.blit(label, (10, 300))
 
-#--------------------------------- MENU LOOP -------------------------------------#
+# --------------------------- MENU LOOP ---------------------------------- #
     def menu_loop(self):
         """ Loop to capture keystrokes """
         while True:
