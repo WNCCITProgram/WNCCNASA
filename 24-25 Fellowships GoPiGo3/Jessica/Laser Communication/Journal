@@ -61,9 +61,20 @@ camera working -- maybe need different code? no recording or streaming options
 update camera software and link it to thingiverse
 begin gathering information for progress report
 Meeting with Melissa Wragge to sign the contract, signed via Docusign
-Set up direct deposit form
+Set up direct deposit form (10/18/24)
 look up IRS publication 970
 start research abstract presentation 
+
+### 10/17/24
+submitted progress report
+
+### 10/30/24
+Connected servo motor for distance sensor
+Connected temperature sensor
+connected BME680 sensor
+Pip installs
+begin researching how to code for the sensors
+
 
 
 
