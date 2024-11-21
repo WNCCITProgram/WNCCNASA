@@ -6,7 +6,7 @@
 # History
 # ------------------------------------------------
 # Author        Date            Comments
-# Loring        09/14/21        Converted to Python3 and tested with Python 3.5
+# Loring        09/14/21        Converted to Python3
 #
 # EasyGoPiGo3 documentation: https://gopigo3.readthedocs.io/en/latest
 # Copyright (c) 2017 Dexter Industries Released under the MIT license

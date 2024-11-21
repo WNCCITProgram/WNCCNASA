@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#############################################################################################################
+#############################################################################
 # Basic example for controlling the GoPiGo using the Keyboard
 # Contributed by casten on Gitub https://github.com/DexterInd/GoPiGo/pull/112
 #
@@ -24,12 +24,12 @@
 # History
 # ------------------------------------------------
 # Author        Date            Comments
-# Loring        04/28/18        Ported from GoPiG, converted to GoPiGo3
+# Loring        04/28/18        Ported from GoPiG0, converted to GoPiGo3
 # Loring        09/06/21        Converted to Python3
 # Loring        09/24/21        Refactored to OOP
 # Loring        11/11/21        Added obstacle avoidance with a timer
 
-##############################################################################################################
+#############################################################################
 # Includes the basic functions for controlling the GoPiGo Robot
 import easygopigo3 as easy  # Import the GoPiGo library
 import atexit               # Used for stopping the GoPiGo when closing the running program
@@ -94,7 +94,7 @@ class RemoteControlGUI:
         # Fill the background with black
         self.background.fill(self.BLACK)
 
-#--------------------------------- DISPLAY INSTRUCTIONS -------------------------------------#
+# --------------------- DISPLAY INSTRUCTIONS ----------------------------- #
     def display_instructions(self):
         """ Create and display instructions for the GUI """
         # Create instructions for remote control of the robot
@@ -142,7 +142,7 @@ class RemoteControlGUI:
         # Update the screen from the screen backbuffer
         pygame.display.update()
 
-#--------------------------------- INCREASE SPEED -------------------------------------#
+# --------------------------- INCREASE SPEED ----------------------------- #
     def increase_speed(self):
         """ Increase the speed of the GoPiGo """
         # Get the current speed
@@ -150,7 +150,7 @@ class RemoteControlGUI:
         # Add 100 to the current speed
         speed = speed + 100
         # Keep speed from going beyond 1000
-        if(speed > 1000):
+        if (speed > 1000):
             speed = 1000
         # Set the new speed
         self.gpg.set_speed(speed)
@@ -167,7 +167,7 @@ class RemoteControlGUI:
             (10, 300)         # x, y coordinates
         )
 
-#--------------------------------- DECREASE SPEED -------------------------------------#
+# ------------------------- DECREASE SPEED ------------------------------- #
     def decrease_speed(self):
         """ Decrease the speed of the GoPiGo """
         # Get current speed
@@ -175,7 +175,7 @@ class RemoteControlGUI:
         # Subtract 100 from the current speed
         speed = speed - 100
         # Keep speed from going below 0
-        if(speed < 0):
+        if (speed < 0):
             speed = 0
         # Set the speed
         self.gpg.set_speed(speed)
@@ -186,7 +186,7 @@ class RemoteControlGUI:
         self.window.blit(self.background, (0, 0))
         self.window.blit(label, (10, 300))
 
-#--------------------------------- INITIALIZE DISTANCE SENSOR AND SERVO -------------------------------------#
+# --------------- INITIALIZE DISTANCE SENSOR AND SERVO ------------------- #
     def init_distance_sensor(self):
         """ Initialize distance sensor and servo """
         # Initialize a distance sensor object
@@ -204,7 +204,7 @@ class RemoteControlGUI:
         # Distance in inches from obstacle where the GoPiGo should stop
         self.AVOIDANCE_DISTANCE = 12
 
-#--------------------------------- OBSTACLE DETECTION -------------------------------------#
+# ---------------------- OBSTACLE DETECTION ------------------------------ #
     def obstacle_avoidance(self):
         # Find the distance of the object in front
         dist = self.distance_sensor.read_inches()
@@ -216,7 +216,7 @@ class RemoteControlGUI:
             self.gpg.turn_degrees(-90)
             # self.gpg.stop()                   # Stop the GoPiGo
 
-#--------------------------------- MAIN PROGRAM LOOP -------------------------------------#
+# ------------------------ MAIN PROGRAM LOOP ----------------------------- #
     def main_loop(self):
 
         # TODO: Add call to distance sensor with pygame.time.clock.tick

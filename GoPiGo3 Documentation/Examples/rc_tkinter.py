@@ -35,7 +35,7 @@ class GoPiGoGUI:
         self.create_widgets()
         mainloop()      # Start the mainloop of the tkinter program
 
-#--------------------------------- CREATE WIDGETS -------------------------------------#
+# -------------------------- CREATE WIDGETS ------------------------------ #
     def create_widgets(self):
         """ Create and layout widgets """
         # Reference for GUI display
@@ -123,41 +123,41 @@ class GoPiGoGUI:
         for child in self.bottom_frame.winfo_children():
             child.grid_configure(padx=pad, pady=pad)
 
-#--------------------------------- INCREASE SPEED -------------------------------------#
+# ------------------------- INCREASE SPEED ------------------------------- #
     def increase_speed(self):
         """ Increase the speed of the GoPiGo """
         speed = self.gpg.get_speed()    # Get the current speed
         speed = speed + 100             # Add 100 to the current speed
         # Keep speed from going beyond 1000
-        if(speed > 1000):
+        if (speed > 1000):
             speed = 1000
         self.gpg.set_speed(speed)       # Set the new speed
         # Display current speed
         self.lbl_speed.config(text="Speed: " + str(speed))
 
-#--------------------------------- DECREASE SPEED -------------------------------------#
+# -------------------------- DECREASE SPEED ------------------------------ #
     def decrease_speed(self):
         """ Decrease the speed of the GoPiGo """
         speed = self.gpg.get_speed()    # Get current speed
         speed = speed - 100             # Subtract 100 from the current speed
         # Keep speed from going below 0
-        if(speed < 100):
+        if (speed < 100):
             speed = 100
         self.gpg.set_speed(speed)       # Set the new speed
         # Display current speed
         self.lbl_speed.config(text="Speed: " + str(speed))
 
-#----------------------------- GET BATTERY VOLTAGE ---------------------------------#
+# ------------------------ GET BATTERY VOLTAGE --------------------------- #
     def get_battery_voltage(self):
         voltage = round(self.gpg.volt(), 1)
         self.lbl_voltage.config(text="Voltage: " + str(voltage) + "V")
 
-#----------------------------- EXIT PROGRAM ---------------------------------#
+# -------------------------- EXIT PROGRAM -------------------------------- #
     def exit_program(self):
-        print("\nExiting")
-        sys.exit()
+        """ Exit the program """
+        self.window.destroy()
 
-#--------------------------------- KEY INPUT -----------------------------------------#
+# --------------------------- KEY INPUT ---------------------------------- #
     def key_input(self, event):
         # Get all key preseses as lower case
         key_press = event.keysym.lower()

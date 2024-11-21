@@ -2,17 +2,16 @@
 
 # Based on
 # https://pythonprogramming.net/robotics-raspberry-pi-tutorial-gopigo-introduction
-# 
+#
 # This uses the EasyGoPiGo3 library
 # https://gopigo3.readthedocs.io/en/master/api-basic/easygopigo3.html
-# 
+#
 # History
 # ------------------------------------------------
 # Author     Date           Comments
 # Loring     09/12/21       Convert to EasyGoPiGo3, test with Python 3.5
 # Loring     10/16/21       Add obstacle avoidance using after
 
-#--------------------------------- IMPORTS ----------------------------------------#
 from tkinter import *       # Import tkinter for GUI
 import sys                  # Used to exit the program
 import easygopigo3 as easy  # Import EasyGoPiGo3 library
@@ -52,11 +51,9 @@ class GoPiGoGUI:
 
         self.window.mainloop()      # Start the mainloop of the tkinter program
 
-#--------------------------------- OBSTACLE DETECTION -------------------------------------#
+# --------------------- OBSTACLE DETECTION ------------------------------- #
     def obstacle_detection(self):
-        """
-            Obstacle detection routine, called every 100 ms from after
-        """
+        """Obstacle detection routine, called every 100 ms from after method"""
         # Find the distance of the object in front
         dist = self.distance_sensor.read_inches()
         # Print feedback to the console for testing
@@ -70,7 +67,7 @@ class GoPiGoGUI:
         # after is a non blocking call, it runs the callback function when the main thread isn't busy
         self.window.after(1000, self.obstacle_detection)
 
-#--------------------------------- OBSTACLE AVOIDANCE -------------------------------------#
+# ------------------------- OBSTACLE AVOIDANCE --------------------------- #
     def obstacle_avoidance(self):
         """
             Obstacle avoidance routine
@@ -81,7 +78,7 @@ class GoPiGoGUI:
         self.gpg.turn_degrees(-90)
         self.gpg.forward()
 
-#--------------------------------- CREATE WIDGETS -------------------------------------#
+# ------------------------ CREATE WIDGETS -------------------------------- #
     def create_widgets(self):
         """ Create and layout widgets """
         # Reference for GUI display
@@ -127,39 +124,33 @@ class GoPiGoGUI:
         for child in self.window.winfo_children():
             child.grid_configure(padx=4, pady=4)
 
-#--------------------------------- INCREASE SPEED -------------------------------------#
+# ------------------------- INCREASE SPEED ------------------------------- #
     def increase_speed(self):
-        """
-            Increase the speed of the GoPiGo
-        """
+        """Increase the speed of the GoPiGo"""
         speed = self.gpg.get_speed()    # Get the current speed
         speed = speed + 100             # Add 100 to the current speed
         # Keep speed from going beyond 1000
-        if(speed > 1000):
+        if (speed > 1000):
             speed = 1000
         self.gpg.set_speed(speed)       # Set the new speed
         # Display current speed
         self.lbl_speed.config(text="Speed: " + str(speed))
 
-#--------------------------------- DECREASE SPEED -------------------------------------#
+# -------------------------- DECREASE SPEED ------------------------------ #
     def decrease_speed(self):
-        """
-            Decrease the speed of the GoPiGo
-        """
+        """Decrease the speed of the GoPiGo"""
         speed = self.gpg.get_speed()    # Get current speed
         speed = speed - 100             # Subtract 100 from the current speed
         # Keep speed from going below 0
-        if(speed < 0):
+        if (speed < 0):
             speed = 0
         self.gpg.set_speed(speed)       # Set the new speed
         # Display current speed
         self.lbl_speed.config(text="Speed: " + str(speed))
 
-#--------------------------------- KEY INPUT -------------------------------------#
+# --------------------------- KEY INPUT ---------------------------------- #
     def key_input(self, event):
-        """
-            Capture all keystroke events
-        """
+        """Capture all keystroke events"""
         # Get all key preseses as lower case
         key_press = event.keysym.lower()
         # print(key_press)  # For testing

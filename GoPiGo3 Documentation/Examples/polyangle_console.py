@@ -4,10 +4,11 @@
     Created: 11/24/21
     Purpose: Python console program to calculate the
     interior and exterior angles of a polygon
+    for dead reckoning in robotics
 """
 
 
-#----------------- CALCULATE ANGLES OF REGULAR POLYGON -------------------------#
+# ------------- CALCULATE ANGLES OF REGULAR POLYGON ----------------------- #
 def calculate_angles(number_of_sides):
     """
         Function to calculate the interior and exterior angle
@@ -24,7 +25,6 @@ def calculate_angles(number_of_sides):
     print(f"Exterior angle: {exterior_angle}°\n")
 
 
-#----------------------------- MAIN METHOD ------------------------------------#
 def main():
     while True:
         print("---------------------------------------------------------------")
@@ -46,7 +46,6 @@ def main():
             main()
 
 
-#---------------------- CALL THE MAIN FUNCTION --------------------------------#
 # If a standalone program, call the main function
 # Else, use as a module
 if __name__ == '__main__':

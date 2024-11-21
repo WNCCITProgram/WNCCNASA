@@ -3,7 +3,7 @@
 # History
 # ------------------------------------------------
 # Author     Date      	    Comments
-# Loring     09/12/21       Example of motor control with Python 3.5
+# Loring     09/12/21       Example of motor control with Python
 #
 # This code is an example for controlling the GoPiGo3 motors.
 # EasyGoPiGo3 documentation: https://gopigo3.readthedocs.io/en/latest

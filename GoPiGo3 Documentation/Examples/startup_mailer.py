@@ -116,11 +116,11 @@ def get_ip_address():
             exit()
         try:
             local_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            
+
             # IP address and port to connect to
             local_socket.connect(("8.8.8.8", 80))
             local_ip_address = local_socket.getsockname()[0]
-            
+
             # print(ip_address) # For testing only
             break
         except Exception as e:
