@@ -1,3 +1,20 @@
+https://wiki.seeedstudio.com/Grove-Temperature_Humidity_Pressure_Gas_Sensor_BME680/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Enabling I2C on RaspberryPi:
 - open RaspberryPi config tool, sudo raspi-config
 - navigate to Interface Options -> I2C -> Enable
