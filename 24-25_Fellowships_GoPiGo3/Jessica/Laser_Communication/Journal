@@ -107,11 +107,17 @@ Needed time to get caught up on schoolwork
 Progress Report
 
 ### 1/3/25
-Sensors Tutorial
-BME680 Tutorial
+download BME280 and BME680 Libraries
+BME680 code to read temperature(°F), pressure(inHg), and humidity(%) in terminal
+ThingSpeak API Key: TU3K2UYVDOIV53LK
+pip install requests
+Data is being sent to ThingSpeak
+
 
 ### 1/6/25
-Thing Speak Tutorial
+Customize ThingSpeak
+Review Tutorials
+
 GoPiGo Tutorials and Resources
 RC Tkinter
 Survo Test
