@@ -115,8 +115,15 @@ Data is being sent to ThingSpeak
 
 
 ### 1/6/25
+sudo apt update
+sudo apt upgrade
+added obstacle avoidance
+align servo motor
+
+
+
 Customize ThingSpeak -- ADD CODE FOR VOCs and ALTITUDE???
-Review Tutorials
+
 
 GoPiGo Tutorials and Resources
 RC Tkinter
