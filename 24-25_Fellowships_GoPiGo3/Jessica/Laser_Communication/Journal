@@ -125,6 +125,7 @@ Threading tutorial
 GOALS:
 
 Week 1:
+-run sensor for 5 days???
 -figure out multithreading for obstacle avoidance
 -have pioneer moving autonomously
 -Customize ThingSpeak -- ADD CODE FOR VOCs and ALTITUDE???
@@ -139,8 +140,12 @@ Week 2:
 -Rover_GUI_Sonar
 
 Week 3:
+-2nd unit for laser communication?
 
 Week 4:
+-Deployment and field testing
+-Deploy the robots in a simulated environment to test their functionality aka navigation accuracy, data collection efficiency, communication reliability
+-Evaluate performance, identify issues, and iterate on the design and programming to improve robot capabilities and reliability
 
 Week 5:
 
