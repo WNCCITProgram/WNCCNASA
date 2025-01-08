@@ -113,68 +113,66 @@ ThingSpeak API Key: TU3K2UYVDOIV53LK
 pip install requests
 Data is being sent to ThingSpeak
 
-
 ### 1/6/25
 sudo apt update
 sudo apt upgrade
 added obstacle avoidance
 align servo motor
 
-
-
-Customize ThingSpeak -- ADD CODE FOR VOCs and ALTITUDE???
-
-
-GoPiGo Tutorials and Resources
-RC Tkinter
-Survo Test
-Rover_GUI_Sonar
-RC_Obstacle_Avoidnace_tkinter
-GoPiGo Distance Sensor Files
-Lidar Files
-Servo Files
-Sensors Files
-
-
-### 1/7/25
-
 ### 1/8/25
+Threading tutorial
 
-### 1/9/25
+GOALS:
 
-### 1/10/25
+Week 1:
+-figure out multithreading for obstacle avoidance
+-have pioneer moving autonomously
+-Customize ThingSpeak -- ADD CODE FOR VOCs and ALTITUDE???
+-servo and obstacle avoidance complete
+-GoPiGo Distance Sensor Files
+-RC_Obstacle_Avoidnace_tkinter
 
-### 1/13/25
+Week 2:
+-GoPiGo Tutorials and Resources
+-lidar tutorials, Lidar Files
+-RC Tkinter
+-Rover_GUI_Sonar
 
-### 1/14/25
+Week 3:
 
-### 1/15/25
+Week 4:
 
-### 1/16/25
+Week 5:
 
-### 1/17/25
+Week 6:
 
-### 1/18/25
+Week 7:
+
+Week 8:
+
+Week 9:
+
+Week 10:
+
+Week 11:
+
+Week 12:
+
+Week 13:
+Prepare Presentation
+
+Week 14:
+Practice Presentation
+
+Week 15:
+Final Presentation
 
 
-###GOALS###
-### 12/16 - 12/22 (30 hours)
-- Bill's Tutorials: thingiverse, threading, sensors, etc.
-- Check ITInstructor github for gopigo3
-- research terrain mapping, environmental scan, autonomous navigation
-- 1 file each: sensors, camera, gui/tkinter, remote control, navigation, etc.
 
-### 12/23 - 12/29 (30 hours)
-- implement sensors/environmental scanning, thingiverse
-- implement terrain mapping
 
-### 12/30/24 - 1/5/25 (30 hours)
-- implement autonomous navigation
 
-### 1/6/25 - 1/12/25 (30 hours)
--
 
-### 1/15/25 Spring Term Begins
+
 
 
 
