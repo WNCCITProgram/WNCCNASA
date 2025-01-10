@@ -197,5 +197,48 @@ RasPi 0 with IMU sensor to connect to GoPiGo-- grove connector?
 
 
 
+1. Hand Controller Setup with Pi Zero Hardware:
+
+Raspberry Pi Zero W (or standard with Wi-Fi dongle).
+MPU-6050 accelerometer module.
+Power bank or battery pack for portability.
+Breadboard and jumper wires.
+Software Installation on Pi Zero:
+
+Ensure I2C is enabled on the Pi Zero (sudo raspi-config > Interface Options > I2C).
+
+Install necessary libraries:
+sudo apt-get update
+sudo apt-get install python3-smbus i2c-tools
+sudo pip3 install socket
+
+Wi-Fi Configuration:
+Connect the Pi Zero to the same Wi-Fi network as the robot's Pi 3.
+
+Gesture Detection Code:
+The Python code to read accelerometer data and send commands remains similar to what I shared earlier.
+Adjust for the smaller footprint of the Pi Zero.
+
+2. Robot Setup (Pi 3 on GoPiGo3):
+No changes are needed here. The GoPiGo3 remains connected to the Pi 3, which listens for commands from the Pi Zero on the hand via Wi-Fi.
+
+3. Communication Between Pi Zero and Pi 3:
+Use Wi-Fi for communication.
+Set the Pi 3 on the robot as a server and the Pi Zero as a client.
+Example Wi-Fi socket communication (as shared in the previous post) works the same way:
+Pi Zero: Sends commands (FORWARD, BACKWARD, LEFT, RIGHT) based on gestures.
+Pi 3: Receives commands and controls the GoPiGo3 motors.
+Optimizing for the Pi Zero
+
+Minimize Processing:
+Only process data when gestures are detected.
+Use thresholds to avoid unnecessary computations.
+
+Power Efficiency:
+Use a small power bank with a 5V output for portability.
+Monitor the battery to avoid interruptions.
+Reduce Latency:
+
+Keep Wi-Fi communication lightweight by sending minimal data (e.g., single-character commands like F, B, L, R).
 
 
