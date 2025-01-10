@@ -184,7 +184,14 @@ Final Presentation
 
 
 
+remote control
+remote control (start stop) obstacle avoidance
+remote control (sensor start and stop) -- but just have it running the whole time
+remote control (
+sensors put into base program-- based from remote control
 
+
+RasPi 0 with IMU sensor to connect to GoPiGo-- grove connector?
 
 
 
