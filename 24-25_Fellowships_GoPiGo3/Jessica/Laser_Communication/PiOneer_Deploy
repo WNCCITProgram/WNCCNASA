@@ -25,6 +25,9 @@
 """
     Notes: make a frame for the on/off buttons and make the buttons align with the label for more room, make the label font size smaller
     Notes: Make the geometry bigger??
+    Notes: Add label and buttons for: GUI navigation control (keyboard), handheld control, sensors
+    Notes: add a frame for the live video stream
+    Notes: add a frame for the thingspeak??
 """
 
 
