@@ -16,9 +16,19 @@
 # ------------------------------------------------
 # Tkinter GUI
   #BUTTONS:
-    # Start/Stop Autonomous Navigation (obstacle avoidance)
+    #-- Start/Stop Autonomous Navigation (obstacle avoidance)
     # Start/Stop GUI Navigation Control (keyboard)
     # Start/Stop Sensors
+
+
+
+"""
+    Notes: make a frame for the on/off buttons and make the buttons align with the label for more room, make the label font size smaller
+    Notes: Make the geometry bigger??
+"""
+
+
+
 
 
 # LIBRARIES
