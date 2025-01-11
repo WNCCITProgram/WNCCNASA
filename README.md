@@ -21,6 +21,20 @@ This project simulates navigating, gathering and transmitting information from M
 
 - Terrain mapping
 
+## Thor the Robot Arm
+
+Thor is a robotic arm project which has been underway for several years.
+
+The original project: [Thor](http://thor.angel-lm.com) An Open Source 3D Printable 6DOF Robotic Arm
+
+[WNCC Thor YouTube Playlist](https://www.youtube.com/playlist?list=PLR6oEuLJnHfhdkXqSacJznSHjEgodiWIl)
+
+12/01/2024 - Thor is assembled and functional.
+
+## Mars Rover
+
+We are starting a new project to build an open source Mars Rover.
+
 ## Astronomy Photos by Tom Robinson
 
 Tom Robinson, astronomy instructor at WNCC, made these photos available to us for use as Unity Assets.
