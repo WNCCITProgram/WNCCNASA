@@ -1,0 +1,108 @@
+"""
+    Name: PiOneer_Deploy.py
+    Author: Jessica Soler
+    Created: 1/10/2025
+    Purpose: Deoloyment Code for Final NASA Space Grant
+"""
+# EasyGoPiGo3 documentation: https://gopigo3.readthedocs.io/en/latest
+# Copyright (c) 2017 Dexter Industries Released under the MIT license
+# History
+# ------------------------------------------------
+# Author     Date      	    Comments
+# Loring     09/25/21       Convert to EasyGoPiGo3, test with Python 3.5
+#
+#
+# Table Of Contents
+# ------------------------------------------------
+# Tkinter GUI
+  #BUTTONS:
+    #-- Start/Stop Autonomous Navigation (obstacle avoidance)
+    # Start/Stop GUI Navigation Control (keyboard)
+    # Start/Stop Sensors
+
+
+
+"""
+    Notes: make a frame for the on/off buttons and make the buttons align with the label for more room, make the label font size smaller
+    Notes: Make the geometry bigger??
+    Notes: Add label and buttons for: GUI navigation control (keyboard), handheld control, sensors
+    Notes: add a frame for the live video stream
+    Notes: add a frame for the thingspeak??
+"""
+
+
+
+
+
+# LIBRARIES
+import tkinter as tk
+from tkinter import ttk
+
+#---PiOneer Deployment Class------------------------------------------------------#
+class PioneerDeploy:
+  def __init__(self, root):
+    # Initialize the class with the main Tkinter window (master)
+    self.root = root
+    # Set the title of the main window
+    root.title("Mars Rover Deployment Controls: PiOneer")
+    
+    # create the main frame to hold the widgets
+    self.main_frame = ttk.Frame(self.root)
+    # Pack the main frame with padding
+    # self.main_frame.pack(padx=20, pady=20)
+    self.main_frame.pack()
+    
+    # Create the Main Frame to hold the control widgets
+    self.create_widgets()
+
+#---Create Widgets---------------------------------------------------------------#
+  def create_widgets(self):
+    # create a label to Start/Stop Autonomous Navigatin (obstacle avoidance)
+    self.obstacle_avoidance = ttk.Label(
+      self.main_frame, text="Autonomous Navigation", font=("Arial", 24))
+    # pack the distance label with vertical padding
+    self.obstacle_avoidance.pack(pady=10)
+
+    # create ON button
+    self.autonomous_on_button = ttk.Button(
+      self.main_frame, text="On", command=self.autonomous_on)
+    # pack the on button with vertical padding
+    self.autonomous_on_button.pack(pady=10)
+
+    # create OFF button
+    self.autonomous_off_button = ttk.Button(
+      self.main_frame, text="Off", command=self.autonomous_off)
+    # pack the off button with veritcal padding
+    self.autonomous_off_button.pack(pady=10)
+    
+
+
+#---Autonomous Navigation--------------------------------------------------------#
+  def autonomous_on(self):
+      # Function to start autonomous navigation
+      # use massagebox to display a message
+      self.messagebox.showinfo("Autonomous Navigation", "Autonomous Navigation Started")
+        
+  def autonomous_off(self):
+      # Function to stop autonomous navigation
+      # use messagebox to display a message
+      self.messagebox.showinfo("Autonomous Navigation", "Autonomous Navigation Stopped")
+       
+        
+#---Main Function---------------------------------------------------------------#
+def main():
+  # Create the main Tkinter window
+  root = tk.Tk()
+  root.geometry("500x400")  # This will set the window size
+  
+  # Create the PiOneer Deployment object
+  current_deployment = PioneerDeploy(root)
+  
+  # Start the main event loop
+  root.mainloop()
+  
+
+#---Run Main Function-----------------------------------------------------------#
+if __name__ == "__main__":
+  main()
+  
