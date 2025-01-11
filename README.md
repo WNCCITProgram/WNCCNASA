@@ -29,7 +29,15 @@ The original project: [Thor](http://thor.angel-lm.com) An Open Source 3D Printab
 
 [WNCC Thor YouTube Playlist](https://www.youtube.com/playlist?list=PLR6oEuLJnHfhdkXqSacJznSHjEgodiWIl)
 
-12/01/2024 - Thor is assembled and functional.
+### Code
+
+- [Thor Aasgard GUI](https://github.com/itinstructor/Asgard) (Forked from AngelLM)
+- [Thor GamePad Control](https://github.com/mike0618/thor_gamepad_control)
+
+### History
+
+- 12/22/2025 - Thor GamePad control programmed and tested.
+- 12/01/2024 - Thor is assembled and functional.
 
 ## Mars Rover
 
