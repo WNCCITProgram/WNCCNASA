@@ -1,0 +1,55 @@
+https://wiki.seeedstudio.com/Grove-Temperature_Humidity_Pressure_Gas_Sensor_BME680/
+
+https://github.com/adafruit/Adafruit_CircuitPython_BME680/blob/main/README.rst
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Enabling I2C on RaspberryPi:
+- open RaspberryPi config tool, sudo raspi-config
+- navigate to Interface Options -> I2C -> Enable
+- install I2C tools, sudo apt-get install -y i2c-tools
+- reboot raspberry pi
+
+# Testing the I2C Configuration
+- comman to detect I2C devices: i2cdetect -y 1
+- you should see the MBE680's I2C address (default is 0x76 or 0x77)
+
+# download and install Bosch's BSEC library if you want advanced features
+# adafruit Python library
+- pip3 install adafruit-circuitpython-bme680
+
+# example code:
+import board
+import busio
+import adafruit_bme680
+
+i2c = busio.I2C(board.SCL, board.SDA)
+sensor = adafruit_bme680.Adafruit_BME680_I2C(i2c)
+
+print(f"Temperature: {sensor.temperature:.2f} °C")
+print(f"Gas: {sensor.gas:.2f} ohms")
+print(f"Humidity: {sensor.humidity:.2f} %")
+print(f"Pressure: {sensor.pressure:.2f} hPa")
+print(f"Altitude: {sensor.altitude:.2f} meters")
+
+# I2C Address Config
+- The BME680 supports two possible I2C addresses
+- make sure you use the correct address in your code!
+
+# Other Considerations:
+- Voltage: 3.3V

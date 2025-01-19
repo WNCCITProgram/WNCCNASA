@@ -1,0 +1,206 @@
+"""
+Name: PiOneer_Deploy.py
+Author: Jessica Soler
+Created: 1/10/2025
+Purpose: Deployment Code for Final NASA Space Grant
+"""
+# EasyGoPiGo3 documentation: https://gopigo3.readthedocs.io/en/latest
+# Copyright (c) 2017 Dexter Industries Released under the MIT license
+# History
+# ------------------------------------------------
+# Author     Date       \t    Comments
+# Loring     09/25/21       Convert to EasyGoPiGo3, test with Python 3.5
+#
+# Table Of Contents
+# ------------------------------------------------
+# Tkinter GUI Main Frame
+  # Navigation Frame:
+    # Start/Stop Autonomous Navigation (obstacle avoidance) Button
+    # Start/Stop GUI Navigation Control (screen click) Button
+    # Start/Stop Keyboard Navigation Control (arrow keys) Button
+    # Start/Stop Hand Navigation Control (hand gestures) Button
+    # Start/Stop PS3 Controller Navigation Control (PS3 controller) Button
+  # Sensor Frame:
+    # Start/Stop Sensor Button
+  # Video Frame:
+    # Live Video Stream
+  # ThingSpeak Frame:  
+    # API Stuff
+    
+      
+#TODO: add class for navigation control 
+# [autonomous, GUI [opens new window], keyboard [opens new window], hand [opens new window?], PS3]
+#TODO: add class for sensors [?]
+#TODO: add class for video stream [?]
+#TODO: add class for ThingSpeak [API]
+#TODO: move sensor frame underneath navigation frame
+#TODO: look into API to get ThingSpeak data in GUI
+
+
+# LIBRARIES
+import tkinter as tk
+     
+#TODO: create deployment class
+class PioneerDeploy:
+    #TODO: create __init__ method
+    def __init__(self, root):
+        # Initialize class with main Tkinter window
+        self.main_window = root
+        
+        # Set the size of the main window
+        self.main_window.geometry("1200x1200")
+        
+        # Set title of main window
+        root.title("Mars Rover Deployment: PiOneer")
+        
+        # Create frames
+        self.create_frames()
+        
+        # Create widgets
+        self.create_widgets()
+        
+#---Create Frames---------------------------------------------------------------#
+    def create_frames(self):
+        # Create a main frame to hold all the widgets
+        self.main_frame = tk.Frame(self.main_window, bd=2, relief=tk.RAISED)
+        self.main_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        
+        # Create a frame for the navigation buttons
+        self.nav_frame = tk.Frame(self.main_frame, bd=2, relief=tk.RAISED)
+        self.nav_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        
+        # Create a frame for the sensor buttons
+        self.sensor_frame = tk.Frame(self.main_frame, bd=2, relief=tk.RAISED)
+        self.sensor_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        
+        # Create a frame for the video stream
+        self.video_frame = tk.Frame(self.main_frame, bd=2, relief=tk.RAISED)
+        self.video_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        
+        # Create a frame for the ThingSpeak
+        self.thingspeak_frame = tk.Frame(self.main_frame, bd=2, relief=tk.RAISED)
+        self.thingspeak_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        
+#---Create Widgets---------------------------------------------------------------#
+    def create_widgets(self):
+        # Create the navigation buttons
+        self.nav_label = tk.Label(self.nav_frame, text="Navigation", font=("Arial", 16))
+        self.nav_label.pack(pady=10)
+        
+        # Create the start/stop autonomous navigation button
+        self.start_stop_auto_nav = tk.Button(self.nav_frame, text="Start Autonomous Navigation", font=("Arial", 12), command=self.toggle_autonomous_navigation)
+        self.start_stop_auto_nav.pack(pady=10)
+        
+        # Create the start/stop GUI navigation control button
+        self.start_stop_gui_nav = tk.Button(self.nav_frame, text="Start GUI Navigation Control", font=("Arial", 12), command=self.toggle_gui_navigation)
+        self.start_stop_gui_nav.pack(pady=10)
+        
+        # Create the start/stop Keyboard navigation control button
+        self.start_stop_keyboard_nav = tk.Button(self.nav_frame, text="Start Keyboard Navigation Control", font=("Arial", 12), command=self.toggle_keyboard_navigation)
+        self.start_stop_keyboard_nav.pack(pady=10)
+        
+        # create the start/stop Hand navigation control button
+        self.start_stop_hand_nav = tk.Button(self.nav_frame, text="Start Hand Navigation Control", font=("Arial", 12), command=self.toggle_hand_navigation)
+        self.start_stop_hand_nav.pack(pady=10)
+        
+        # Create the start/stop PS3 controller navigation control button
+        self.start_stop_ps3_nav = tk.Button(self.nav_frame, text="Start PS3 Controller Navigation Control", font=("Arial", 12), command=self.toggle_ps3_navigation)
+        self.start_stop_ps3_nav.pack(pady=10)
+        
+        # Create the start/stop sensors button
+        self.start_stop_sensors = tk.Button(self.sensor_frame, text="Start Sensors", font=("Arial", 12), command=self.toggle_sensors)
+        self.start_stop_sensors.pack(pady=10)
+        
+        # Create the video stream
+        self.video_label = tk.Label(self.video_frame, text="Live Video Stream", font=("Arial", 16))
+        self.video_label.pack(pady=10)
+        
+        # Create the ThingSpeak
+        self.thingspeak_label = tk.Label(self.thingspeak_frame, text="ThingSpeak", font=("Arial", 16))
+        self.thingspeak_label.pack(pady=10)
+        
+#---Autonomous Navigation--------------------------------------------------------#
+    def toggle_autonomous_navigation(self):
+        # Toggle function for autonomous navigation
+        if self.start_stop_auto_nav['text'] == "Start Autonomous Navigation":
+            self.start_stop_auto_nav.config(text="Stop Autonomous Navigation")
+            print("Autonomous navigation started.")
+            # Add code to initiate navigation here
+        else:
+            self.start_stop_auto_nav.config(text="Start Autonomous Navigation")
+            print("Autonomous navigation stopped.")
+            # Add code to stop navigation here
+
+#---GUI Navigation Control-------------------------------------------------------#
+    def toggle_gui_navigation(self):
+        # Toggle function for GUI navigation control
+        if self.start_stop_gui_nav['text'] == "Start GUI Navigation Control":
+            self.start_stop_gui_nav.config(text="Stop GUI Navigation Control")
+            print("GUI navigation control started.")
+            # Add code to initiate GUI navigation control here
+        else:
+            self.start_stop_gui_nav.config(text="Start GUI Navigation Control")
+            print("GUI navigation control stopped.")
+            # Add code to stop GUI navigation control here
+            
+#---Keyboard Navigation Control--------------------------------------------------#
+    def toggle_keyboard_navigation(self):
+        # Toggle function for Keyboard navigation control
+        if self.start_stop_keyboard_nav['text'] == "Start Keyboard Navigation Control":
+            self.start_stop_keyboard_nav.config(text="Stop Keyboard Navigation Control")
+            print("Keyboard navigation control started.")
+            # Add code to initiate Keyboard navigation control here
+        else:
+            self.start_stop_keyboard_nav.config(text="Start Keyboard Navigation Control")
+            print("Keyboard navigation control stopped.")
+            # Add code to stop Keyboard navigation control here
+            
+#---Hand Navigation Control------------------------------------------------------#
+    def toggle_hand_navigation(self):
+        # Toggle function for Hand navigation control
+        if self.start_stop_hand_nav['text'] == "Start Hand Navigation Control":
+            self.start_stop_hand_nav.config(text="Stop Hand Navigation Control")
+            print("Hand navigation control started.")
+            # Add code to initiate Hand navigation control here
+        else:
+            self.start_stop_hand_nav.config(text="Start Hand Navigation Control")
+            print("Hand navigation control stopped.")
+            # Add code to stop Hand navigation control here
+            
+#---PS3 Controller Navigation Control--------------------------------------------#
+    def toggle_ps3_navigation(self):
+        # Toggle function for PS3 controller navigation control
+        if self.start_stop_ps3_nav['text'] == "Start PS3 Controller Navigation Control":
+            self.start_stop_ps3_nav.config(text="Stop PS3 Controller Navigation Control")
+            print("PS3 controller navigation control started.")
+            # Add code to initiate PS3 controller navigation control here
+        else:
+            self.start_stop_ps3_nav.config(text="Start PS3 Controller Navigation Control")
+            print("PS3 controller navigation control stopped.")
+            # Add code to stop PS3 controller navigation control here
+            
+#---Sensors---------------------------------------------------------------------#
+    def toggle_sensors(self):
+        # Toggle function for sensors
+        if self.start_stop_sensors['text'] == "Start Sensors":
+            self.start_stop_sensors.config(text="Stop Sensors")
+            print("Sensors started.")
+            # Add code to initiate sensors here
+        else:
+            self.start_stop_sensors.config(text="Start Sensors")
+            print("Sensors stopped.")
+            # Add code to stop sensors here
+            
+#---Main Function---------------------------------------------------------------#
+def main():
+    # Create the main window
+    root = tk.Tk()
+    
+    # Create the deployment object
+    deploy = PioneerDeploy(root)
+    
+    # Start the main loop
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
