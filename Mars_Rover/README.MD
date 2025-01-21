@@ -1,4 +1,4 @@
-# NASA Mars Rover Project
+# NASA Tyr the Mars Rover Project
 
 ## Videos
 

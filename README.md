@@ -4,7 +4,16 @@
 - This is the pespository for Western Nebraska Community College NASA Nebraska Space Grant Student Fellowships and NASA projects
 - Enhancing Computer Science Curriculum using off-the-shelf Robotics Kits to Increase Whole Brain Learning. This is part of an ongoing project by Bill Loring (Mentor). Thor and the Mars Stair Climing Rover are part of this.
 
-## Sp25 Mars Stair Climbing Rover
+## Sp25 Tyr the Mars Rover
+
+In Norse mythology, the Scandinavian god most closely associated with Mars, the Roman god of war, is Týr (pronounced "teer").
+
+Týr is primarily depicted as a god of justice, courage, and war, which aligns with Mars's characteristics, and the name "Tuesday" in English is derived from "Týr's day". Considered a brave and just warrior, often associated with upholding oaths and agreements.
+Famous myth:
+
+In Norse stories, Týr famously lost his hand while trying to bind the monstrous wolf Fenrir.
+
+Connection to Mars: The "interpretatio romana" (Roman interpretation) of Norse gods often linked Týr with Mars.
 
 Take a look at the project in the [Mars_Rover](/Mars_Rover/) folder.
 
