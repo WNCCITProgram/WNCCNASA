@@ -45,29 +45,30 @@ def read_ir_keys():
     except IOError or easygopigo3.SensorError as e:
         pass
 
-
-print("Use the arrows on your remote controller to control your GoPiGo3")
-print("The IR Receiver (remote sensor) should connected to port AD1")
-print("Ctrl-C to exit the program")
-
-
-gpg.set_grove_type(
-    gpg.GROVE_1,
-    gpg.GROVE_TYPE.IR_DI_REMOTE
-)
-while True:
-    try:
-        read_ir_keys()
-
-    # except the program gets interrupted by Ctrl+C on the keyboard.
-    except KeyboardInterrupt:
-        # Unconfigure the sensors, disable the motors, and
-        # restore the LED to the control of the GoPiGo3 firmware.
-        gpg.reset_all()
-        exit(0)
-
-    except:
-        pass
+# where program starts
+def main():
+    print("Use the arrows on your remote controller to control your GoPiGo3")
+    print("The IR Receiver (remote sensor) should connected to port AD1")
+    print("Ctrl-C to exit the program")
+    
+    
+    gpg.set_grove_type(
+        gpg.GROVE_1,
+        gpg.GROVE_TYPE.IR_DI_REMOTE
+    )
+    while True:
+        try:
+            read_ir_keys()
+    
+        # except the program gets interrupted by Ctrl+C on the keyboard.
+        except KeyboardInterrupt:
+            # Unconfigure the sensors, disable the motors, and
+            # restore the LED to the control of the GoPiGo3 firmware.
+            gpg.reset_all()
+            exit(0)
+    
+        except:
+            pass
 
 
 if __name__ == "__main__":
