@@ -139,7 +139,11 @@ tested code
 put deploy code on raspberrypi 
 tested ps4 controller
 tested ir remote controller
-REALLY NEED TO FIGURE OUT THREADING NOW!!!!!!
+
+### 1/31/25
+multithread code for navigation, sensors, live stream, and thingspeak
+next need to import navigation modules, sensor modules, video modules, and research thingspeak API integartion into the GUI
+will this requrie reconfiguration of my wireframe???
 
 
 
