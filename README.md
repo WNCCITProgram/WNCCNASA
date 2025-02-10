@@ -25,10 +25,6 @@ Take a look at the project in the [Mars_Rover](/Mars_Rover/) folder.
 
 This project simulates navigating, gathering and transmitting information from Mars to Earth using Raspberry Pi based [GoPiGo3](https://gopigo.io)'s.
 
-### Ansonia
-
-- Environmental sensors
-
 ### Jessica
 
 - Laser communication
