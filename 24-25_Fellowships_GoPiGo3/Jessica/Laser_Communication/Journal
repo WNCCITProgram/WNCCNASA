@@ -145,6 +145,11 @@ multithread code for navigation, sensors, live stream, and thingspeak
 next need to import navigation modules, sensor modules, video modules, and research thingspeak API integartion into the GUI
 will this requrie reconfiguration of my wireframe???
 
+### 2/5/25
+re-evaluated goals
+Fix toggle issue-- debugging
+
+
 
 
 
