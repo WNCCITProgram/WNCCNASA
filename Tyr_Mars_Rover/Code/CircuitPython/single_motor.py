@@ -1,9 +1,13 @@
-# SPDX-License-Identifier: MIT
+
+# CircuitPython code to drive a single motor using the motor2040 board
+# This code is based on the example code from the Pimoroni GitHub repository
+# https://github.com/pimoroni/pico-circuitpython-examples/tree/main/motor2040
 
 import time
 import board
 import pwmio
 import digitalio
+# Copy the adafruit_motor library folder to the lib folder on the pico
 from adafruit_motor import motor
 
 # Pins of the motor to drive
@@ -15,11 +19,6 @@ FREQUENCY = 25000               # Chose a frequency above human hearing
 DECAY_MODE = motor.SLOW_DECAY   # The decay mode affects how the motor
                                 # responds, with SLOW_DECAY having improved spin
                                 # threshold and speed-to-throttle linearity
-
-# Create a digitalinout object for the user switch
-user_sw = digitalio.DigitalInOut(board.USER_SW)
-user_sw.direction = digitalio.Direction.INPUT
-user_sw.pull = digitalio.Pull.UP
 
 # Create the pwm and motor objects
 pwm_p = pwmio.PWMOut(MOTOR_P, frequency=FREQUENCY)

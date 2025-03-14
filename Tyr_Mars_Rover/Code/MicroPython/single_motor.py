@@ -1,3 +1,7 @@
+# This code is based on the example code from the Pimoroni GitHub repository for the motor2040 library.
+# https://github.com/pimoroni/pimoroni-pico/tree/main/micropython/examples/motor2040
+# MicroPython code to demonstrate how to control a motor using the motor2040 library
+
 import time
 import math
 from motor import Motor, motor2040
