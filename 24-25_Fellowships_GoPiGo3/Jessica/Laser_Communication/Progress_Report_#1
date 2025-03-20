@@ -1,0 +1,83 @@
+Jessica Soler
+October 31, 2024
+
+NASA Grant Progress Report
+Mars Rover Reconnaissance: Environmental Sensing, Laser Communication, and Terrain Mapping via Raspberry Pi GoPiGo Robotics
+Reporting Period: August 21, 2024 – October 16, 2024
+
+Key Accomplishments
+
+August 21, 2024
+- Reviewed grant acceptance requirements; uploaded biography and photo.
+- Registered for ORCiD and NASA STEM Gateway.
+- Documented progress report and final report deadlines.
+- Added Nebraska Academy of Sciences presentation date to academic travel list.
+- Received GoPiGo and accessed GitHub repository for project documentation.
+
+August 27, 2024
+- Uploaded birth certificate and officially accepted the grant.
+- Charged the battery for Rover1.
+- Linked Nebraska NASA Space Grant to ORCiD.
+- Faced technical difficulties installing Raspberry Pi OS on Rover1.
+
+August 28, 2024
+- Met with faculty advisor to troubleshoot technical issues.
+- Checked firewall/antivirus settings and attempted to connect via PuTTY without success.
+
+September 12, 2024
+- Successfully installed Raspberry Pi OS Bullseye and updated the configuration.
+- Connected via SSH and completed OS updates.
+- Disabled onboard Wi-Fi and configured SSIDs for school/home networks.
+- Installed GoPiGo3 software and set up TigerVNC Viewer.
+- Set up a Gmail account to facilitate communication with the device.
+
+September 18, 2024
+- Received additional hardware: BME680 sensor (temperature, humidity, pressure, gas), camera, infrared receiver, and distance sensor.
+- Named the GoPiGo rover "PiOneer."
+- Developed code to control PiOneer via keyboard and confirmed movement.
+- 3D printed attachments for sensors, camera, and infrared remote case.
+
+September 25, 2024
+- Conducted research on environmental sensors for data collection.
+- Created a ThingSpeak account for sensor data integration.
+
+October 2, 2024
+- Created a quick guide for logging into PiOneer.
+- Updated TigerVNC, added temperature monitoring with warning thresholds, and enhanced desktop shortcuts.
+- Configured Wi-Fi signal monitoring using Wavemon.
+- Adjusted motor ticks from 6 to 16 for improved control.
+- Installed Visual Studio Code for Raspberry Pi development.
+
+October 9, 2024
+- Began GoPiGo tutorials to enhance functionality.
+- Confirmed infrared remote control functionality.
+- Camera operational but still investigating recording and streaming options.
+
+October 16, 2024
+- Updated camera software and began linking it to ThingSpeak for streaming and data analysis.
+- Planning to begin researching laser communication and laser terrain mapping soon, ahead of the January and February milestones.
+- Added autonomous navigation to the to-do list for October to meet the project timeline.
+
+
+Issues Encountered
+
+Initial technical difficulties with installing Raspberry Pi OS and connecting via SSH. These were resolved with troubleshooting efforts and advisor support.
+Camera functionality is limited; working on improving streaming and recording capabilities.
+
+
+Next Steps
+
+Continue refining camera functionality and integrating it with ThingSpeak.
+Complete GoPiGo tutorials and further develop the control and data processing features.
+Begin researching laser communication and laser terrain mapping ahead of schedule.
+Start testing PiOneer’s sensors and logging real-time data on ThingSpeak.
+Work on autonomous navigation to align with the October milestone for remote and autonomous control.
+
+
+
+Overall Assessment
+
+I am on track and meeting most of the early milestones and laying solid groundwork for future goals.
+I've been proactive in identifying and resolving technical issues and integrating components like sensors and remote control.
+
+I plan to allocate more time to autonomous navigation this month and continue building on my progress with sensors to meet the November goals. 

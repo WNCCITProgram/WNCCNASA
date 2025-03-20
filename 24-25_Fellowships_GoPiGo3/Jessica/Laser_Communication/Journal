@@ -1,0 +1,285 @@
+### 8/21/24 
+Today I began reading through the grant acceptance requirements—uploaded photo and biography.  
+I signed up for ORCiD, The NASA STEM Gateway, Documented the progress reporting due dates and 
+anticipated final report date.  I added the Nebraska Academy of Sciences presentation date to my 
+list of travel dates for the academic year and discussed the absence with professors.  I received my 
+GoPiGo today.  I accessed a github repository for my project.  And I created this journal to help 
+document my progress that will be included in the progress reports. 
+
+### 8/27/24 
+I uploaded my birth certificate and accepted the grant.  I charged Rover1’s battery. I added the 
+Nebraska NASA Space Grant to my ORCiD account. I began attempting to install OS on RaspberryPi but had some techincal difficulties.
+
+### 8/28/24  
+Meeting with advisor from 12-1pm, still having technical difficulties.  Checked firewall and antivirus settings on computer.  Cannot connect with PuTTY. 
+
+### 9/12/24
+Installed Raspberry Pi OS Bullseye
+Booted and connected to device by SSH and updated configuration settings.
+Updated Raspberry Pi OS
+Disabled Onboard Wi-Fi, added SSIDs for school and home.
+Setup GoPiGo3 Software
+Setup TigerVNC Viewer
+Setup a Gmail Account for Email
+Sent Email IP Address
+
+### 9/18/24
+Received:
+Grove BME680 Sensor (Temp, Humidity, Pressure, Gas)
+camera
+infrared receiver
+distance sensor
+infrared remote control
+Named my GoPiGo -- PiOneer
+added code to move PiOneer with keyboard
+PiOneer moves
+3D printed sensor attachments
+3D printed camera attachment
+3D printed infrared remote case
+
+### 9/25/24
+research sensors
+created ThingSpeak.com account
+
+### 10/2/24
+created a guide to remember how to log into PiOneer
+updated TigerVNC
+added seconds to clock
+added temperature monitor with warnings at 60 and 80 degrees
+set desktop shortcuts to open without prompt
+configured wavemon to monitor wi-fi signal strength in real time
+change motor ticks to 16 rather than 6
+Install Visual Studio Code for Raspberry Pi
+
+### 10/9/24
+begin GoPiGo Tutorials and Resources
+IR remote working
+camera working -- maybe need different code? no recording or streaming options
+
+### 10/16/24
+update camera software and link it to thingiverse
+begin gathering information for progress report
+Meeting with Melissa Wragge to sign the contract, signed via Docusign
+Set up direct deposit form (10/18/24)
+look up IRS publication 970
+start research abstract presentation 
+
+### 10/17/24
+submitted progress report
+
+### 10/30/24
+Connected servo motor for distance sensor
+Connected temperature sensor
+connected BME680 sensor
+Pip installs
+begin researching how to code for the sensors
+
+### 11/6/24
+Sick
+
+### 11/13/24
+Needed time to get caught up on schoolwork
+
+### 11/20/24
+- created a schedule through the end of Winter Break and starting Spring 2025
+- created TODO's and wrote down code structure
+- discussed threading (gopigo > code > python threading tutorial)
+
+### 11/27/24
+- prep for finals, no NASA
+- updatd goals and time commitment
+
+### 12/4/24
+- prep for finals, no NASA
+
+### 12/11 
+- Finals Week, no NASA
+
+### 12/21
+- research bme680
+
+### 12/26
+- added code for bme680 sensor
+- more research on bme680
+- went through bme680 sensor tutorial
+
+### 1/1/25
+Progress Report
+
+### 1/3/25
+download BME280 and BME680 Libraries
+BME680 code to read temperature(°F), pressure(inHg), and humidity(%) in terminal
+ThingSpeak API Key: TU3K2UYVDOIV53LK
+pip install requests
+Data is being sent to ThingSpeak
+
+### 1/6/25
+sudo apt update
+sudo apt upgrade
+added obstacle avoidance
+align servo motor
+
+### 1/8/25
+Threading tutorial
+
+### 1/10/25
+Create GUI code-- that I will implement other code into
+Added main frame, and label/buttons for autonomous navigation
+
+### 1/17/25
+added to GUI code-- navigation frame with autonomous, GUI, keyboard, hand gesture, ps3 control buttons that toggle on and off
+added to GUI code-- sensor frame with sensor button that toggles on and off
+added to GUI code-- video frame with video button that toggles on and off
+added to GUI code-- thingspeak frame, currently empty
+
+### 1/24/25
+received wireless controller
+added code for controller
+tested code
+put deploy code on raspberrypi 
+tested ps4 controller
+tested ir remote controller
+
+### 1/31/25
+multithread code for navigation, sensors, live stream, and thingspeak
+next need to import navigation modules, sensor modules, video modules, and research thingspeak API integartion into the GUI
+will this requrie reconfiguration of my wireframe???
+
+### 2/5/25
+re-evaluated goals
+Fix toggle issue-- debugging
+
+2/12/25
+debugging
+added navigation modules
+multithreading
+
+
+
+
+
+GOALS:
+
+Week 1:
+#TODO: add class for navigation control 
+# [autonomous, GUI [opens new window], keyboard [opens new window], hand [opens new window?], PS3]
+# can you have more than one type of navigation at once???
+#TODO: add class for sensors [?]
+#TODO: add class for video stream [?]
+#TODO: add class for ThingSpeak [API]
+#TODO: move sensor frame underneath navigation frame
+#TODO: look into API to get ThingSpeak data in GUI
+
+-figure out multithreading for obstacle avoidance
+-have pioneer moving autonomously
+-Customize ThingSpeak -- ADD CODE FOR VOCs and ALTITUDE???
+-servo and obstacle avoidance complete
+-GoPiGo Distance Sensor Files
+-RC_Obstacle_Avoidnace_tkinter
+-implement streaming of video-- GUI??
+-Bluetooth-- remote control gaming
+
+Week 2:
+-GoPiGo Tutorials and Resources
+-lidar tutorials, Lidar Files
+-RC Tkinter
+-Rover_GUI_Sonar
+
+Week 3:
+-2nd unit for laser communication?
+
+Week 4:
+-Deployment and field testing
+-Deploy the robots in a simulated environment to test their functionality aka navigation accuracy, data collection efficiency, communication reliability
+-Evaluate performance, identify issues, and iterate on the design and programming to improve robot capabilities and reliability
+
+Week 5:
+
+Week 6:
+
+Week 7:
+
+Week 8:
+
+Week 9:
+
+Week 10:
+
+Week 11:
+
+Week 12:
+Prepare Abstract
+
+Week 13:
+Prepare Presentation
+
+Week 14:
+Practice Presentation
+
+Week 15:
+Final Presentation
+
+
+
+
+
+
+
+remote control
+remote control (start stop) obstacle avoidance
+remote control (sensor start and stop) -- but just have it running the whole time
+remote control (
+sensors put into base program-- based from remote control
+
+
+RasPi 0 with IMU sensor to connect to GoPiGo-- grove connector?
+
+
+
+
+
+1. Hand Controller Setup with Pi Zero Hardware:
+
+Raspberry Pi Zero W (or standard with Wi-Fi dongle).
+MPU-6050 accelerometer module.
+Power bank or battery pack for portability.
+Breadboard and jumper wires.
+Software Installation on Pi Zero:
+
+Ensure I2C is enabled on the Pi Zero (sudo raspi-config > Interface Options > I2C).
+
+Install necessary libraries:
+sudo apt-get update
+sudo apt-get install python3-smbus i2c-tools
+sudo pip3 install socket
+
+Wi-Fi Configuration:
+Connect the Pi Zero to the same Wi-Fi network as the robot's Pi 3.
+
+Gesture Detection Code:
+The Python code to read accelerometer data and send commands remains similar to what I shared earlier.
+Adjust for the smaller footprint of the Pi Zero.
+
+2. Robot Setup (Pi 3 on GoPiGo3):
+No changes are needed here. The GoPiGo3 remains connected to the Pi 3, which listens for commands from the Pi Zero on the hand via Wi-Fi.
+
+3. Communication Between Pi Zero and Pi 3:
+Use Wi-Fi for communication.
+Set the Pi 3 on the robot as a server and the Pi Zero as a client.
+Example Wi-Fi socket communication (as shared in the previous post) works the same way:
+Pi Zero: Sends commands (FORWARD, BACKWARD, LEFT, RIGHT) based on gestures.
+Pi 3: Receives commands and controls the GoPiGo3 motors.
+Optimizing for the Pi Zero
+
+Minimize Processing:
+Only process data when gestures are detected.
+Use thresholds to avoid unnecessary computations.
+
+Power Efficiency:
+Use a small power bank with a 5V output for portability.
+Monitor the battery to avoid interruptions.
+Reduce Latency:
+
+Keep Wi-Fi communication lightweight by sending minimal data (e.g., single-character commands like F, B, L, R).
+
+
