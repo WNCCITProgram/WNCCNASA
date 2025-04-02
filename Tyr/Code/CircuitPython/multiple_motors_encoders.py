@@ -11,6 +11,14 @@ import pwmio  # For generating PWM signals
 import rotaryio  # For reading rotary encoders
 from adafruit_motor import motor  # For motor control
 
+# Timers are for the motor run time
+TIMER_LONG = 15
+TIMER_SHORT = 5
+# These change the speed of the motors used in the main function 
+FORWARD_FAST = 1
+FORWARD_SLOW = .5
+BACKWARD_FAST = -1
+BACKWARD_SLOW= -.5
 
 class MotorWithEncoder:
     """
@@ -124,27 +132,27 @@ def main():
             encoder_b_pin=board.ENCODER_C_B,
             gear_ratio=50
         )
+    while True:
+            # Perform a series of movements with the motor
+            # Move forward at 50% speed for 1 second
+            motor_with_encoder_A.perform_movement("Forward slow", "Motor_A", FORWARD_FAST, TIMER_LONG)
+            motor_with_encoder_B.perform_movement("Forward slow", "Motor_B", FORWARD_FAST, TIMER_LONG)
+            motor_with_encoder_C.perform_movement("Forward slow", "Motor_C", FORWARD_FAST, TIMER_LONG)
 
-        # Perform a series of movements with the motor
-        # Move forward at 50% speed for 1 second
-        motor_with_encoder_A.perform_movement("Forward slow", "Motor_A", 0.5, 1)
-        motor_with_encoder_B.perform_movement("Forward slow", "Motor_B", 0.5, 1)
-        motor_with_encoder_C.perform_movement("Forward slow", "Motor_C", 0.5, 1)
-
-        # Move forward at full speed for 1 second
-        motor_with_encoder_A.perform_movement("Forward fast", "Motor_A", 1.0, 1)
-        motor_with_encoder_B.perform_movement("Forward fast", "Motor_B", 1.0, 1)
-        motor_with_encoder_C.perform_movement("Forward fast", "Motor_C", 1.0, 1)
-        
-        # Move backward at 50% speed for 1 second
-        motor_with_encoder_A.perform_movement("Backwards slow", "Motor_A", -0.5, 1)
-        motor_with_encoder_B.perform_movement("Backwards slow", "Motor_B", -0.5, 1)
-        motor_with_encoder_C.perform_movement("Backwards slow", "Motor_C", -0.5, 1)
-        
-        # Move backward at full speed for 1 second
-        motor_with_encoder_A.perform_movement("Backwards fast", "Motor_A", -1.0, 1)
-        motor_with_encoder_B.perform_movement("Backwards fast", "Motor_B", -1.0, 1)
-        motor_with_encoder_C.perform_movement("Backwards fast", "Motor_C", -1.0, 1)
+            # Move forward at full speed for 1 second
+            motor_with_encoder_A.perform_movement("Forward fast", "Motor_A", FORWARD_SLOW, TIMER_LONG)
+            motor_with_encoder_B.perform_movement("Forward fast", "Motor_B", FORWARD_SLOW, TIMER_LONG)
+            motor_with_encoder_C.perform_movement("Forward fast", "Motor_C", FORWARD_SLOW, TIMER_LONG)
+            
+            # Move backward at 50% speed for 1 second
+            motor_with_encoder_A.perform_movement("Backwards slow", "Motor_A", BACKWARD_FAST, TIMER_LONG)
+            motor_with_encoder_B.perform_movement("Backwards slow", "Motor_B", BACKWARD_FAST, TIMER_LONG)
+            motor_with_encoder_C.perform_movement("Backwards slow", "Motor_C", BACKWARD_FAST, TIMER_LONG)
+            
+            # Move backward at full speed for 1 second
+            motor_with_encoder_A.perform_movement("Backwards fast", "Motor_A", BACKWARD_SLOW, TIMER_LONG)
+            motor_with_encoder_B.perform_movement("Backwards fast", "Motor_B", BACKWARD_SLOW, TIMER_LONG)
+            motor_with_encoder_C.perform_movement("Backwards fast", "Motor_C", BACKWARD_SLOW, TIMER_LONG)
         
 
         #Stops the motors
