@@ -16,21 +16,26 @@ class MyController(Controller):
     def on_x_release(self):
         print("Goodbye world")
 
-    def on_L2_press(self, value):
-        print(value)
-
-    def on_R2_press(self, value):
-        value += 32767
-        value /= 256
+    def on_R3_down(self, value):
+        value /= 128
         value += 51
         value /= 1.2
         value = int(value)
-        bus.write_i2c_block_data(motor2040_addr, 0x00, [value])  # Register 0x00
+        if value < 50:
+            value = 0
+        bus.write_i2c_block_data(motor2040_addr, 0x01, [value])  # Register 0x01
         print(value)
 
-    def on_R2_release(self):
-        bus.write_i2c_block_data(motor2040_addr, 0x00, [1])  # Register 0x00
-        print("STOP")
+    def on_R3_up(self, value):
+        value *= -1
+        value /= 128
+        value += 51
+        value /= 1.2
+        value = int(value)
+        if value < 50:
+            value = 0
+        bus.write_i2c_block_data(motor2040_addr, 0x00, [value])  # Register 0x00
+        print(value)
 
     def on_L3_up(self, value):
         print(value)
@@ -44,17 +49,13 @@ class MyController(Controller):
     def on_L3_right(self, value):
         print(value)
 
-    def on_R3_up(self, value):
-        print(value)
-
-    def on_R3_down(self, value):
-        print(value)
-
     def on_R3_left(self, value):
-        print(value)
+        # print(value)
+        pass
 
     def on_R3_right(self, value):
-        print(value)
+        # print(value)
+        pass
 
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)

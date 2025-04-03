@@ -15,6 +15,7 @@ mot.decay_mode = DECAY_MODE
 
 # Set Motor2040 as an I2C slave at address 0x40
 with I2CTarget(board.SCL, board.SDA, (0x40,)) as device:
+    reg = None
     while True:
         try:
             i2c_target_request = device.request()
@@ -22,10 +23,14 @@ with I2CTarget(board.SCL, board.SDA, (0x40,)) as device:
                 continue  # No request, loop again
             with i2c_target_request:
                 data = i2c_target_request.read(1)
-                data = int.from_bytes(data)
-                if data:
-                    # print(data)
-                    data -= 1  # to maintain stop
-                    mot.throttle = data / 254
+                if reg is None:
+                    reg = data[0]
+                else:
+                    val = data[0]
+                    if reg:
+                        val *= -1
+                    print(reg, val)
+                    mot.throttle = val / 255
+                    reg = None
         except Exception as e:
             print(e)
