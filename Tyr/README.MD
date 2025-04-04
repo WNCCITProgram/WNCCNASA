@@ -21,9 +21,9 @@ Project management is at [ClickUp](https://www.clickup.com)
 
 Devil Design Bright Green and Black filament
 
-## Original Code
+## Original Idea
 
-We modified the electronics from this BOM and code.
+We modified the electronics from this BOM.
 
 <https://github.com/Lukas2233/Rover-Project>
 
