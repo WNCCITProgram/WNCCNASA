@@ -5,5 +5,6 @@
 ## CircuitPython Libraries
 
 - [Motor 2040 CirciutPython](https://circuitpython.org/board/pimoroni_motor2040/)
-- [CirciutPython Libraries](https://circuitpython.org/libraries) 
+- [CirciutPython Libraries](https://circuitpython.org/libraries)
   - adafruit_motor library to drive motors
+  - 
