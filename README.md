@@ -27,11 +27,7 @@ This project simulates navigating, gathering and transmitting information from M
 
 ### Jessica
 
-- Laser communication
-
-### Matthew
-
-- Terrain mapping
+- Sensors, remote control
 
 ## 2021-25 Thor the Robot Arm
 
