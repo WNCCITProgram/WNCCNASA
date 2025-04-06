@@ -1,9 +1,18 @@
 from pyPS4Controller.controller import Controller
 import smbus
+from adafruit_servokit import ServoKit
 from time import sleep
 
 bus = smbus.SMBus(1)  # Use I2C bus 1
-motor2040_addr = 0x40  # Replace with actual address
+motor2040_addr = 0x44  # Replace with actual address
+kit = ServoKit(channels=16)
+MAX_RANGE = 130
+HALF_RANGE = MAX_RANGE // 2
+COEF = 32767 // HALF_RANGE
+servos = [kit.servo[i] for i in range(6)]
+for i in range(6):
+    servos[i].angle = HALF_RANGE
+    servos[i].actuation_range = MAX_RANGE
 
 
 class MyController(Controller):
@@ -65,10 +74,17 @@ class MyController(Controller):
         print(value)
 
     def on_L3_left(self, value):
+        value *= -1
+        value //= COEF
+        value = HALF_RANGE - value
         print(value)
+        servos[0].angle = value
 
     def on_L3_right(self, value):
+        value //= COEF
+        value += HALF_RANGE
         print(value)
+        servos[0].angle = value
 
     def on_R3_left(self, value):
         # print(value)
