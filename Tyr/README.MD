@@ -26,4 +26,3 @@ Devil Design Bright Green and Black filament
 We modified the electronics from this BOM.
 
 <https://github.com/Lukas2233/Rover-Project>
-
