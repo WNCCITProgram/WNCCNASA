@@ -11,8 +11,8 @@ HALF_RANGE = MAX_RANGE // 2
 COEF = 32767 // HALF_RANGE
 servos = [kit.servo[i] for i in range(6)]
 for i in range(6):
-    servos[i].angle = HALF_RANGE
     servos[i].actuation_range = MAX_RANGE
+    servos[i].angle = HALF_RANGE
 
 
 class MyController(Controller):
