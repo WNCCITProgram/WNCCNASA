@@ -5,14 +5,18 @@ from time import sleep
 
 bus = smbus.SMBus(1)  # Use I2C bus 1
 motor2040_addr = 0x44  # Replace with actual address
-kit = ServoKit(channels=16)
 MAX_RANGE = 130
 HALF_RANGE = MAX_RANGE // 2
 COEF = 32767 // HALF_RANGE
-servos = [kit.servo[i] for i in range(6)]
-for i in range(6):
-    servos[i].actuation_range = MAX_RANGE
-    servos[i].angle = HALF_RANGE
+servos = None
+try:
+    kit = ServoKit(channels=16)
+    servos = [kit.servo[i] for i in range(6)]
+    for i in range(6):
+        servos[i].actuation_range = MAX_RANGE
+        servos[i].angle = HALF_RANGE
+except ValueError:
+    print("Servo controller is not connected")
 
 
 class MyController(Controller):
@@ -38,7 +42,10 @@ class MyController(Controller):
         if value < 50:
             value = 0
         # Makes the wheel turn the speed of the value given by controller
-        bus.write_i2c_block_data(motor2040_addr, 0x01, [value])  # Register 0x01
+        try:
+            bus.write_i2c_block_data(motor2040_addr, 0x01, [value])  # Register 0x01
+        except OSError:
+            print("motor2040 is not connected")
         # Retuns value for trouble shooting
         print(value)
 
@@ -58,13 +65,19 @@ class MyController(Controller):
         if value < 50:
             value = 0
         # Makes the wheel turn the speed of the value given by controller
-        bus.write_i2c_block_data(motor2040_addr, 0x00, [value])  # Register 0x00
+        try:
+            bus.write_i2c_block_data(motor2040_addr, 0x00, [value])  # Register 0x00
+        except OSError:
+            print("motor2040 is not connected")
         # Retuns value for trouble shooting
         print(value)
 
     # Stops the controller when the thumb stick is at rest
     def on_R3_y_at_rest(self):
-        bus.write_i2c_block_data(motor2040_addr, 0x00, [0])  # Register 0x00
+        try:
+            bus.write_i2c_block_data(motor2040_addr, 0x00, [0])  # Register 0x00
+        except OSError:
+            print("motor2040 is not connected")
         print("Stop")
 
     def on_L3_up(self, value):
@@ -78,13 +91,15 @@ class MyController(Controller):
         value //= COEF
         value = HALF_RANGE - value
         print(value)
-        servos[0].angle = value
+        if servos:
+            servos[0].angle = value
 
     def on_L3_right(self, value):
         value //= COEF
         value += HALF_RANGE
         print(value)
-        servos[0].angle = value
+        if servos:
+            servos[0].angle = value
 
     def on_R3_left(self, value):
         # print(value)
