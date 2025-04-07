@@ -19,6 +19,13 @@ except ValueError:
     print("Servo controller is not connected")
 
 
+def move(reg: int, value: int):
+    try:
+        bus.write_i2c_block_data(motor2040_addr, reg, [value])
+    except OSError:
+        print("motor2040 is not connected")
+
+
 class MyController(Controller):
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
@@ -42,10 +49,7 @@ class MyController(Controller):
         if value < 50:
             value = 0
         # Makes the wheel turn the speed of the value given by controller
-        try:
-            bus.write_i2c_block_data(motor2040_addr, 0x01, [value])  # Register 0x01
-        except OSError:
-            print("motor2040 is not connected")
+        move(0x01, value)  # register 1 - backward
         # Retuns value for trouble shooting
         print(value)
 
@@ -65,19 +69,13 @@ class MyController(Controller):
         if value < 50:
             value = 0
         # Makes the wheel turn the speed of the value given by controller
-        try:
-            bus.write_i2c_block_data(motor2040_addr, 0x00, [value])  # Register 0x00
-        except OSError:
-            print("motor2040 is not connected")
+        move(0x00, value)  # register 0 - forward
         # Retuns value for trouble shooting
         print(value)
 
     # Stops the controller when the thumb stick is at rest
     def on_R3_y_at_rest(self):
-        try:
-            bus.write_i2c_block_data(motor2040_addr, 0x00, [0])  # Register 0x00
-        except OSError:
-            print("motor2040 is not connected")
+        move(0x00, 0)
         print("Stop")
 
     def on_L3_up(self, value):
