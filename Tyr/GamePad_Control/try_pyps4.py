@@ -2,12 +2,15 @@ from pyPS4Controller.controller import Controller
 import smbus
 from adafruit_servokit import ServoKit
 from time import sleep
+from math import pi, tan, atan, degrees, radians
 
 bus = smbus.SMBus(1)  # Use I2C bus 1
 motor2040_addr = 0x44  # Replace with actual address
 MAX_RANGE = 130
 HALF_RANGE = MAX_RANGE // 2
 COEF = 32767 // HALF_RANGE
+_dr = 100  # distance between the opposite wheels, adjust after assembling
+_a = 100  # distance between the adjacent wheels, adjust after assembling
 servos = None
 try:
     kit = ServoKit(channels=16)
@@ -29,6 +32,28 @@ def move(reg: int, value: int):
 class MyController(Controller):
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
+        self.car_mode = True
+        # TODO: add other modes: rover and parallel
+        self.v1 = 0
+        self.v2 = 0
+        self.v3 = 0
+        self.beta = 0
+
+    def for_car_mode(self, v0, alpha):
+        """Calculate the secondary wheel angle and speeds for car mode"""
+        # these are the most complicated calculations here
+        if alpha < 3:  # threshold and avoid zero division
+            self.beta = alpha
+            self.v1 = self.v2 = self.v3 = v0
+            return True
+        r = _a / tan(radians(alpha))
+        r_ = (r**2 + _a**2) ** 0.5
+        R = r + _dr
+        R_ = (R**2 + _a**2) ** 0.5
+        self.beta = round(degrees(atan(_a / R)))
+        self.v1 = round(v0 * R / R_)
+        self.v2 = round(v0 * r_ / R_)
+        self.v3 = round(v0 * r / R_)
 
     def on_x_press(self):
         print("Hello world")
@@ -50,6 +75,7 @@ class MyController(Controller):
             value = 0
         # Makes the wheel turn the speed of the value given by controller
         move(0x01, value)  # register 1 - backward
+        # TODO: move all motors
         # Retuns value for trouble shooting
         print(value)
 
@@ -70,6 +96,7 @@ class MyController(Controller):
             value = 0
         # Makes the wheel turn the speed of the value given by controller
         move(0x00, value)  # register 0 - forward
+        # TODO: move all motors
         # Retuns value for trouble shooting
         print(value)
 
@@ -87,16 +114,28 @@ class MyController(Controller):
     def on_L3_left(self, value):
         value *= -1
         value //= COEF
+        ###########################################
+        self.for_car_mode(100, value)
+        # 100 is for demonstration. It will splitted to speed and angle for car_mode separated functions
+        print(value, self.beta, 100, self.v1, self.v2, self.v3)
+        ###########################################
         value = HALF_RANGE - value
-        print(value)
+        # print(value)
         if servos:
+            # TODO: send angle to all servos
             servos[0].angle = value
 
     def on_L3_right(self, value):
         value //= COEF
+        ###########################################
+        self.for_car_mode(100, value)
+        # 100 is for demonstration. It will splitted to speed and angle for car_mode separated functions
+        print(value, self.beta, 100, self.v1, self.v2, self.v3)
+        ###########################################
         value += HALF_RANGE
-        print(value)
+        # print(value)
         if servos:
+            # TODO: send angle to all servos
             servos[0].angle = value
 
     def on_R3_left(self, value):
