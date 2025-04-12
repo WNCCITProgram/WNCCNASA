@@ -1,8 +1,9 @@
 # NASA Tyr the Mars Rover
 
-Project management is at [ClickUp](https://www.clickup.com)
+- Tyr's and Other NASA Projects [YouTube Play List](https://www.youtube.com/playlist?list=PLR6oEuLJnHfhdkXqSacJznSHjEgodiWIl)
+- Project management is at [ClickUp](https://www.clickup.com)
 
-## Videos
+## Videos for Research
 
 - [Stair Climbing Rover Assembly](https://www.youtube.com/watch?v=bXdt8hng2WM&t=590s)
 - [Stair Climbing Rover Outdoor Test](https://www.youtube.com/watch?v=90HxqwZaWRA)
@@ -19,10 +20,14 @@ Project management is at [ClickUp](https://www.clickup.com)
 - <https://www.printables.com/model/202779-switch-panel-for-stair-climbing-rover>
 - <https://www.printables.com/model/212819-raspberry-pi-mount-for-stair-climbing-rover>
 
-Devil Design Bright Green and Black filament
-
 ## Original Idea
 
 We modified the electronics from this BOM.
 
 <https://github.com/Lukas2233/Rover-Project>
+
+## Tyr the Mars Rover Materials List
+
+2 - [Motor2040 - Quad Motor Controllers](https://shop.pimoroni.com/products/motor-2040?variant=39884997853267)
+
+- We choose this as each controller supports 4 motors, we control the left and right side with separate motor controllers. This controller offers PWM and PID support and is programmed in CircuitPython.
