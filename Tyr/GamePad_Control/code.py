@@ -19,8 +19,8 @@ motA.decay_mode = DECAY_MODE
 motB.decay_mode = DECAY_MODE
 motC.decay_mode = DECAY_MODE
 
-# Set Motor2040 as an I2C slave at address 0x40
-with I2CTarget(board.SCL, board.SDA, (0x40,)) as device:
+# Set Motor2040 as an I2C slave at address 0x44
+with I2CTarget(board.SCL, board.SDA, (0x44,)) as device:
     reg = None
     while True:
         try:
@@ -32,15 +32,22 @@ with I2CTarget(board.SCL, board.SDA, (0x40,)) as device:
                 # separate register and data
                 if reg is None:
                     reg = data[0]
-                else:
-                    val = data[0]
-                    if reg:  # reg = 1 for backward
-                        val *= -1
-                    print(reg, val)
-                    val /= 255
+                    continue
+                val = data[0]
+                val /= 255
+                if reg == 0:
                     motA.throttle = val
+                elif reg == 1:  # reg = 1 for backward
+                    motA.throttle = -val
+                elif reg == 2:
                     motB.throttle = val
+                elif reg == 3:
+                    motB.throttle = -val
+                elif reg == 4:
                     motC.throttle = val
-                    reg = None
+                elif reg == 5:
+                    motC.throttle = -val
+                print(reg, val)
+                reg = None
         except Exception as e:
             print(e)
