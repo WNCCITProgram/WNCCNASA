@@ -8,8 +8,8 @@ from math import tan, atan, degrees, radians
 bus = smbus.SMBus(1)
 motor2040R = 0x44
 motor2040L = 0x48
-R_ANGLE = 51.45
-R_COEF = 0.624
+R_ANGLE = 51.45  # calc from the rover dimentions
+R_COEF = 0.624  # calc from the rover dimentions
 MAX_RANGE = 180
 HALF_RANGE = MAX_RANGE // 2
 COEF = 32767 // HALF_RANGE
@@ -32,7 +32,6 @@ class MyController(Controller):
         Controller.__init__(self, **kwargs)
         self.car_mode = True  # car/parallel
         self.rover_mode = False  # static turn
-        # TODO: Switch between car/parallel modes with X button, rover_mode - O button
         self.v0 = 0  # original speed from controller
         self.v1 = 0
         self.v2 = 0
@@ -196,20 +195,22 @@ class MyController(Controller):
         self.turning()
 
     def on_x_press(self):  # switch between car/parallel modes
-        self.v0 = self.v1 = self.v2 = self.v3 = 0
-        self.car_move()  # to make sure it stopped
+        self.stop()
         if self.straight():
             self.car_mode = not self.car_mode
 
     def on_circle_press(self):  # switch rover mode
-        self.v0 = self.v1 = self.v2 = self.v3 = 0
-        self.car_move()  # to make sure it stopped
+        self.stop()
         if self.rover_mode:
             self.rover_mode = not self.straight()
         else:
             self.rover_mode = self.rover_turn()
 
+    def stop(self):
+        self.v0 = self.v1 = self.v2 = self.v3 = 0
+        self.car_move()  # to make sure it stopped
+
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
 # you can start listening before controller is paired, as long as you pair it within the timeout window
-controller.listen(timeout=60)
+controller.listen(timeout=60, on_disconnect=controller.stop())
