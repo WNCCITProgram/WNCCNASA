@@ -31,7 +31,7 @@ class MyController(Controller):
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
         self.car_mode = True  # car/parallel
-        self.rover_mode = False
+        self.rover_mode = False  # static turn
         # TODO: Switch between car/parallel modes with X button, rover_mode - O button
         self.v0 = 0  # original speed from controller
         self.v1 = 0
@@ -46,6 +46,7 @@ class MyController(Controller):
         for i in range(6):
             servos[i].angle = HALF_RANGE
         sleep(1)  # let servos complete turn
+        return True
 
     def spin(self, controller, reg, val):
         try:
@@ -112,6 +113,7 @@ class MyController(Controller):
         servos[4].angle = HALF_RANGE
         servos[5].angle = HALF_RANGE - R_ANGLE
         sleep(1)  # let the servos complete turn
+        return True  # switch successful
 
     def rover_move(self):
         v0 = self.v0
@@ -192,6 +194,20 @@ class MyController(Controller):
         value //= COEF
         self.alpha = value
         self.turning()
+
+    def on_x_press(self):  # switch between car/parallel modes
+        self.v0 = self.v1 = self.v2 = self.v3 = 0
+        self.car_move()  # to make sure it stopped
+        if self.straight():
+            self.car_mode = not self.car_mode
+
+    def on_circle_press(self):  # switch rover mode
+        self.v0 = self.v1 = self.v2 = self.v3 = 0
+        self.car_move()  # to make sure it stopped
+        if self.rover_mode:
+            self.rover_mode = not self.straight()
+        else:
+            self.rover_mode = self.rover_turn()
 
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
