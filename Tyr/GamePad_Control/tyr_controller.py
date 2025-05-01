@@ -8,7 +8,7 @@ from math import tan, atan, degrees, radians
 bus = smbus.SMBus(1)
 motor2040R = 0x44
 motor2040L = 0x48
-R_ANGLE = 51.45  # calc from the rover dimentions
+R_ANGLE = 52  # calc from the rover dimentions
 R_COEF = 0.624  # calc from the rover dimentions
 MAX_RANGE = 180
 HALF_RANGE = MAX_RANGE // 2
@@ -120,7 +120,7 @@ class MyController(Controller):
         if self.v0 < 0:
             v0 = -v0
             c2, c1 = motor2040L, motor2040R
-        v1 = v0 * R_COEF
+        v1 = round(v0 * R_COEF)
         self.spin(c1, 0x00, [v0])
         self.spin(c1, 0x02, [v1])
         self.spin(c1, 0x04, [v0])
