@@ -1,4 +1,4 @@
-# Tyr project
+# Tyr Project
 
 ## "Car mode" turn calculations
 
