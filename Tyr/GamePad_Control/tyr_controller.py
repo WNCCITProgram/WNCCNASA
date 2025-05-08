@@ -4,6 +4,7 @@ import smbus
 from adafruit_servokit import ServoKit
 from time import sleep
 from math import tan, atan, degrees, radians
+import shutdown_raspi
 
 bus = smbus.SMBus(1)
 motor2040R = 0x44
@@ -199,6 +200,11 @@ class MyController(Controller):
         self.rover_mode = False
         if self.straight():
             self.car_mode = not self.car_mode
+
+    def on_options_press(self): # For turing the pi off safely
+        self.stop
+        # This is using imported script to turn off the pi
+        shutdown_raspi.shutdown_rpi()
 
     def on_circle_press(self):  # switch rover mode
         self.stop
