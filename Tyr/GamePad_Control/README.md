@@ -1,6 +1,6 @@
 # Tyr Project
 
-## "Car mode" turn calculations
+## Gamepad "Car mode" turn calculations
 
 ![tyr_turn.png](tyr_turn.png)
 
@@ -18,6 +18,8 @@
 **The Gamepad must be in connecting mode before booting the RPI**
 
 ## Controls
+
+Sony Ps4 Controller
 
 - Left stick Right/Left to make turn
 - Right stick Up/Down to move Forward/Backward
