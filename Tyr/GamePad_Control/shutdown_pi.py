@@ -1,6 +1,5 @@
 """
 shutdown_pi.py
-Owen Osmera
 Purpose: A module to soft shut down the Raspberry Pi from the PS4 controller
 using subprocess to call the shutdown command with sudo.
 The command is executed in a shell environment.
