@@ -1,8 +1,10 @@
-# WNCC NASA NeSpaceGrant.org
+# WNCC NASA NeSpaceGrant.org Projects
 
 - These projects are supported by the [NASA Nebraska Space Grant](https://www.nespacegrant.org)
 - This is the repository for Western Nebraska Community College NASA Nebraska Space Grant Student Fellowships and NASA projects.
 - Enhancing Computer Science Curriculum using off-the-shelf Robotics Kits to Increase Whole Brain Learning. This is part of an ongoing project by Bill Loring (Mentor). Thor and the Mars Stair Climbing Rover are part of this.
+
+# Current Projects
 
 ## Sp25 Tyr the Mars Rover
 
@@ -22,15 +24,6 @@ Take a look at the project in the [Tyr](/Tyr) folder.
 
 ![Mars Stair Climbing Rover](./img/rover.png)
 
-
-## 2024-25 NASA Fellowships Mars Rover Simulations
-
-This project simulates navigating, gathering, and transmitting information from Mars to Earth using Raspberry Pi-based [GoPiGo3](https://gopigo.io)'s.
-
-### Jessica
-
-- Sensors, remote control.
-
 ## 2021-25 Thor the Robot Arm
 
 Thor is a robotic arm project which has been underway for several years.
@@ -46,9 +39,18 @@ The original project: [Thor](http://thor.angel-lm.com) - An Open Source 3D Print
 
 ### History
 
-- **01/15/2025** - Thor Asgard GUI control program converted to PySide6 for Windows.
 - **12/22/2025** - Thor GamePad control programmed and tested.
 - **12/01/2024** - Thor is assembled and functional.
+
+# Archived Projects
+
+## 2024-25 NASA Fellowships Mars Rover Simulations
+
+This project simulates navigating, gathering, and transmitting information from Mars to Earth using Raspberry Pi-based [GoPiGo3](https://gopigo.io)'s.
+
+### Jessica
+
+- Sensors, remote control.
 
 ## Astronomy Photos by Tom Robinson
 
@@ -79,10 +81,10 @@ We are working on 3D printing projects to be painted with acrylic paints. This i
 
 Bill Loring (Mentor): I am an Information Technology Instructor at Western Nebraska Community College. I teach Information Technology Technical Support, CyberSecurity, and Computer Science.
 
-I have a repository for my own [GoPiGo3 projects](https://github.com/itinstructor/GoPiGo3).
+Visit my GitHub repository for my own [GoPiGo3](https://github.com/itinstructor/GoPiGo3) and Raspberry Pi projects.
 
 - Facebook: [Facebook WNCC IT Program](https://www.facebook.com/wnccitprogram/)
-- YouTube: [YouTube WNCC IT Program](https://www.youtube.com/@williamloringitinstructor)
+- YouTube: [YouTube WNCC IT Program](https://www.youtube.com/@wnccitprogram)
 
 ### License
 
