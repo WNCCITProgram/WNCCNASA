@@ -31,6 +31,7 @@ class MyController(Controller):
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
         self.car_mode = True  # car/parallel
+        self.onestick = True  # use one stick to control
         self.rover_mode = False  # static turn
         self.v0 = 0  # original speed from controller
         self.v1 = 0
@@ -167,12 +168,24 @@ class MyController(Controller):
         self.driving()
 
     def on_L3_left(self, value):  # the value is negative
-        self.alpha = 1 + value // COEF
-        self.turning()
+        if not self.onestick:
+            self.alpha = 1 + value // COEF
+            self.turning()
 
     def on_L3_right(self, value):
-        self.alpha = value // COEF
-        self.turning()
+        if not self.onestick:
+            self.alpha = value // COEF
+            self.turning()
+
+    def on_R3_left(self, value):  # the value is negative
+        if self.onestick:
+            self.alpha = 1 + value // COEF
+            self.turning()
+
+    def on_R3_right(self, value):
+        if self.onestick:
+            self.alpha = value // COEF
+            self.turning()
 
     ### Switch Functions ###
 
@@ -188,6 +201,9 @@ class MyController(Controller):
             self.rover_mode = not self.straight()
         else:
             self.rover_mode = self.rover_turn()
+
+    def on_triangle_press(self):  # switch 1 or 2 sticks control
+        self.onestick = not self.onestick
 
     def on_options_press(self):  # For turing the pi off safely
         self.stop

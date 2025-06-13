@@ -1,6 +1,6 @@
-# Tyr Project
+# Tyr project
 
-## Gamepad "Car mode" turn calculations
+## "Car mode" turn calculations
 
 ![tyr_turn.png](tyr_turn.png)
 
@@ -19,9 +19,9 @@
 
 ## Controls
 
-Sony Ps4 Controller
-
-- Left stick Right/Left to make turn
+- Left stick Right/Left to make turn (*in Two sticks mode*)
 - Right stick Up/Down to move Forward/Backward
+- Right stick Right/Left to make turn (*in One stick mode*)
 - X button to switch between Car/Parallel modes
 - O button to switch the Rover mode on/off
+- Δ button to switch between One/Two sticks control
