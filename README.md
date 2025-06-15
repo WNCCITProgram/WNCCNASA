@@ -24,13 +24,13 @@ Take a look at the project in the [Tyr](/Tyr) folder.
 
 ![Mars Stair Climbing Rover](./img/rover.png)
 
+[WNCC NASA YouTube Playlist](https://www.youtube.com/playlist?list=PLR6oEuLJnHfhdkXqSacJznSHjEgodiWIl)
+
 ## 2021-25 Thor the Robot Arm
 
 Thor is a robotic arm project which has been underway for several years.
 
 The original project: [Thor](http://thor.angel-lm.com) - An Open Source 3D Printable 6DOF Robotic Arm.
-
-[WNCC Thor YouTube Playlist](https://www.youtube.com/playlist?list=PLR6oEuLJnHfhdkXqSacJznSHjEgodiWIl)
 
 ### Code
 
