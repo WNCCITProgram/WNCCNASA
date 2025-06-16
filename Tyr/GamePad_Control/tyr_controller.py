@@ -159,12 +159,12 @@ class MyController(Controller):
 
     def on_R3_down(self, value):  # max value is 32767
         """Adjust the range to 42 - 255 the bus can use and give the controller a dead zone to stop the wheels"""
-        self.v0 = int((value + 6503) / 154) if value > 700 else 0
+        self.v0 = int((value + 6503) / 154) if value > 300 else 0
         self.driving()
 
     def on_R3_up(self, value):  # the value is negative
         """Adjust the range to (-42) - (-255) the bus can use and give the controller a dead zone to stop the wheels"""
-        self.v0 = int((value - 6503) / 154) if value < -700 else 0
+        self.v0 = int((value - 6503) / 154) if value < -300 else 0
         self.driving()
 
     def on_L3_left(self, value):  # the value is negative
@@ -216,4 +216,4 @@ class MyController(Controller):
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
 # you can start listening before controller is paired, as long as you pair it within the timeout window
-controller.listen(timeout=60, on_disconnect=controller.stop)
+controller.listen(timeout=600, on_disconnect=controller.stop)
