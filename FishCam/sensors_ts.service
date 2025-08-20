@@ -1,0 +1,19 @@
+# sudo systemctl daemon-reload
+# sudo systemctl enable sensors_ts
+# sudo systemctl start sensors_tx
+# sudo journalctl -u sensors_ts -f
+
+[Unit]
+Description=Read sensors and send to ThingSpeak
+After=network-online.target sshd.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+ExecStart=/home/pi/Aquaponics/.venv/bin/python /home/pi/Aquaponics/sensors_ts.py
+WorkingDirectory=/home/pi/Aquaponics
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
