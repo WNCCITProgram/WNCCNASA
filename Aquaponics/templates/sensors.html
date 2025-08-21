@@ -63,8 +63,8 @@
                 <div class="col-md-6 mb-3">
                     <iframe class="chart-iframe" src="https://thingspeak.com/channels/1539695/widgets/1111908"></iframe>
 
-                    <br>(1. The fishes are happy with the water level.)
-                    <br>(0. The water level is too low and the fishes are not happy.)
+                    <br>1. The fishes are happy with the water level.
+                    <br>0. The water level is too low. The fishes are not happy.
                 </div>
                 <div class="col-md-6 mb-3">
                     <iframe class="chart-iframe"
@@ -112,5 +112,8 @@
     </div>
 </div>
 
+<div class="text-center">
+    <a href="{{ url_for('index') }}" class="btn btn-primary">View Live Stream</a>
+</div>
 
 {% endblock %}

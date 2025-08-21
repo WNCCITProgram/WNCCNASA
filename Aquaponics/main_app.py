@@ -128,8 +128,8 @@ def get_media_relay(stream_url: str) -> Union[MediaRelay, CachedMediaRelay]:
     with _relay_lock:  # Make sure only one thread can modify the relay dictionary at a time
         if stream_url not in _media_relay:
             # Determine if this is likely a wireless camera (adjust logic as needed)
-            is_wireless = "172.16.1.200" in stream_url  # Your Pi camera IP
-            
+            is_wireless = DEFAULT_STREAM_HOST in stream_url  # Your Pi camera IP
+
             if is_wireless:
                 # Use cached relay for wireless cameras
                 # Wireless connections are unreliable, so we use caching for stability

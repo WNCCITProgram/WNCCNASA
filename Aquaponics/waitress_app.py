@@ -15,7 +15,8 @@ path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # Get the absolute path to this script's directory
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_DIR = os.path.join(SCRIPT_DIR, "logs")
-LOG_FILE = os.path.join(LOG_DIR, "waitress_app.log")
+# Use base name without .log so rotated files become waitress_app.YYYY-MM-DD.log
+LOG_FILE = os.path.join(LOG_DIR, "waitress_app")
 
 # Create logs directory
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -37,7 +38,7 @@ try:
         LOG_FILE, when="midnight", interval=1, backupCount=7, encoding="utf-8"
     )
     
-    # Customize how rotated log files are named (waitress_app.2025-08-17.log)
+    # Rotated name format: waitress_app.2025-08-19.log
     handler.suffix = "%Y-%m-%d.log"
     import re
     handler.extMatch = re.compile(r"^\d{4}-\d{2}-\d{2}\.log$")
@@ -53,7 +54,7 @@ try:
     logger.info("=== Waitress app logging reconfigured with rotation ===")
     logger.info(f"Script directory: {SCRIPT_DIR}")
     logger.info(f"Current working directory: {os.getcwd()}")
-    logger.info(f"Log file: {LOG_FILE}")
+    logger.info(f"Log base file (current): {LOG_FILE}")
     logger.info("Flask app imported successfully")
     
     # Force flush
