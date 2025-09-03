@@ -25,3 +25,8 @@
 - X button to switch between Car/Parallel modes
 - O button to switch the Rover mode on/off
 - Δ button to switch between One/Two sticks control
+
+## Importing Code
+
+  - Importing old controller code to Pi
+      - To use as a reference when developing changes
