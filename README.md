@@ -2,7 +2,7 @@
 
 - These projects are supported by the [NASA Nebraska Space Grant](https://www.nespacegrant.org)
 - This is the repository for Western Nebraska Community College NASA Nebraska Space Grant Student Fellowships and NASA projects.
-- Enhancing Computer Science Curriculum using off-the-shelf Robotics Kits to Increase Whole Brain Learning. This is part of an ongoing project by Bill Loring (Mentor). Thor and the Mars Stair Climbing Rover are part of this.
+- Enhancing Computer Science Curriculum using off-the-shelf Robotics Kits to Increase Whole Brain Learning. This is part of an ongoing project by Bill Loring (Mentor). Thor and Tyr the Mars Stair Climbing Rover are part of this project.
 
 # Current Projects
 
