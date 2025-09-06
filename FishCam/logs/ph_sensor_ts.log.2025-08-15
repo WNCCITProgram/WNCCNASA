@@ -1,0 +1,19 @@
+2025-08-15 15:30:02,126 - INFO - pH sensor smbus initialized successfully
+2025-08-15 15:31:00,012 - INFO - pH sensor smbus initialized successfully
+2025-08-15 16:00:44,048 - INFO - pH sensor smbus initialized successfully
+2025-08-15 16:01:29,380 - INFO - pH sensor smbus initialized successfully
+2025-08-15 16:06:30,738 - INFO - pH sensor smbus initialized successfully
+2025-08-15 16:13:16,513 - INFO - pH sensor smbus initialized successfully
+2025-08-15 16:18:26,941 - INFO - pH sensor smbus initialized successfully
+2025-08-15 16:20:26,350 - INFO - pH sensor smbus initialized successfully
+2025-08-15 16:20:26,355 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:20:27,356 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:20:28,356 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:20:29,356 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:20:30,357 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:27:18,866 - INFO - pH sensor smbus initialized successfully
+2025-08-15 16:27:18,870 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:27:19,870 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:27:20,871 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:27:21,871 - ERROR - Error reading pH sensor: channel must be 0..3
+2025-08-15 16:28:45,716 - INFO - pH sensor smbus initialized successfully

@@ -4,11 +4,11 @@ Centralizes all configurable parameters for easy maintenance
 """
 
 # Sensor Reading Configuration
-SENSOR_READ_INTERVAL = 15  # seconds between sensor readings
+SENSOR_READ_INTERVAL = 30  # seconds between sensor readings
 THINGSPEAK_INTERVAL = 600  # seconds between ThingSpeak updates (10 minutes)
 
 # Calculated values based on intervals
-READINGS_PER_CYCLE = THINGSPEAK_INTERVAL // SENSOR_READ_INTERVAL
+READINGS_PER_CYCLE = THINGSPEAK_INTERVAL // SENSOR_READ_INTERVAL  # 20 readings
 
 # Email Configuration
 ENABLE_SCHEDULED_EMAILS = True
@@ -20,17 +20,15 @@ SMTP_PORT = 587  # TLS port for Gmail
 EMAIL_TIMEOUT = 30  # Connection timeout in seconds
 
 # Default email settings (can be overridden)
-DEFAULT_SENDER_EMAIL = "wnccrobotics@gmail.com"
-# Use App Password, not regular password
-DEFAULT_SENDER_PASSWORD = "loyqlzkxisojeqsr"
+DEFAULT_SENDER_EMAIL = "Your gmail address"
+DEFAULT_SENDER_PASSWORD = (
+    "Your Gmail App Password"  # Use App Password, not regular password
+)
 
 # Multiple recipients - add more email addresses here
 DEFAULT_RECIPIENT_EMAILS = [
-    "williamaloring@gmail.com",
-    "williamloring@hotmail.com",
-    "sarah.trook31@gmail.com",
-    # "admin@wncc.edu",
-    # "tech@wncc.edu",
+    "you@you.com",
+    "tech@wat.com",
 ]
 
 # Email template constants
@@ -38,13 +36,13 @@ SUBJECT_PREFIX = "Aquaponics "
 DEFAULT_SUBJECT = f"{SUBJECT_PREFIX} System Notification"
 
 # Data Processing Configuration
-TRIM_PERCENT = (
-    0.05  # Percentage to trim from each end for outlier removal (10%)
-)
+TRIM_PERCENT = 0.1  # Percentage to trim from each end for outlier removal (10%)
 
 # Sensor Thresholds for Alerts
 WATER_TEMP_MIN = 65.0  # Fahrenheit
 WATER_TEMP_MAX = 85.0  # Fahrenheit
+HUMIDITY_MIN = 40.0  # Percentage
+HUMIDITY_MAX = 80.0  # Percentage
 
 # System Configuration
 LOG_BACKUP_COUNT = 7  # Number of log files to keep

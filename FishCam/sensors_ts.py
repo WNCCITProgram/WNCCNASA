@@ -19,8 +19,8 @@ import requests
 
 # pip install bme680
 from bme680_ts import BME680Sensor
-from liquid_level_sensor_ts import LiquidLevelSensor
-from temp_water_sensor_ts import WaterTemperatureSensor
+from water_level_sensor_ts import WaterLevelSensor
+from water_temp_sensor_ts import WaterTemperatureSensor
 from ph_sensor_ts import PHSensor
 
 # Import email notification system
@@ -80,7 +80,7 @@ if not logger.handlers:
 
 # Initialize sensor objects
 sensor = BME680Sensor()
-liquid_level_sensor = LiquidLevelSensor()
+liquid_level_sensor = WaterLevelSensor()
 water_temp_sensor = WaterTemperatureSensor()
 ph_sensor = PHSensor()
 

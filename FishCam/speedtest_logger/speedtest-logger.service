@@ -1,0 +1,27 @@
+[Unit]
+Description=Internet Speed Test Logger
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/speedtest-logger
+ExecStart=/usr/bin/python3 /home/pi/speedtest-logger/speedtest_logger.py
+Restart=always
+RestartSec=30
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=speedtest-logger
+
+# Environment variables
+Environment=PYTHONUNBUFFERED=1
+
+# Restart conditions
+RestartSec=30
+StartLimitInterval=350
+StartLimitBurst=10
+
+[Install]
+WantedBy=multi-user.target

@@ -13,7 +13,6 @@ import time
 from logging.handlers import TimedRotatingFileHandler
 
 # Import GPIO Zero for direct sensor control
-
 try:
     from gpiozero import DigitalInputDevice
 
@@ -22,13 +21,14 @@ except ImportError:
     GPIO_AVAILABLE = False
 
 # Define the GPIO pin number where the sensor is connected
-SENSOR_PIN = 18  # GPIO pin 18 (physical pin 12)
+# GPIO pin 23 (physical pin 16)
+SENSOR_PIN = 23
 
 # Get logger for this module (no handlers configured here)
 logger = logging.getLogger(__name__)
 
 
-class LiquidLevelSensor:
+class WaterLevelSensor:
     """
     Liquid level sensor wrapper class for aquaponics monitoring.
     Handles initialization, data reading, and status reporting.
@@ -72,7 +72,7 @@ class LiquidLevelSensor:
 
             # GPIO Zero makes reading very simple - just check the 'value' property
             # We use 'not sensor.value' to invert the logic for sensors that read HIGH when dry
-            liquid_present = not self.sensor.value
+            liquid_present = self.sensor.value
 
             if liquid_present:
                 return 1  # Liquid detected
@@ -126,7 +126,7 @@ def read_liquid_level():
         int: 1 if liquid detected, 0 if no liquid detected, None if error
     """
     try:
-        sensor = LiquidLevelSensor()
+        sensor = WaterLevelSensor()
         return sensor.read_sensor()
     except Exception as e:
         logger.error(f"Failed to read liquid level sensor: {e}")
@@ -142,7 +142,7 @@ def main():
 
     sensor = None
     try:
-        sensor = LiquidLevelSensor()
+        sensor = WaterLevelSensor()
 
         while True:
             status = sensor.read_sensor()
@@ -158,7 +158,7 @@ def main():
                 print(f"[{current_time}] ⚠ Failed to read sensor data")
 
             # Wait 1 second before next reading
-            time.sleep(1)
+            time.sleep(2)
 
     except KeyboardInterrupt:
         print("\nProgram interrupted by user.")

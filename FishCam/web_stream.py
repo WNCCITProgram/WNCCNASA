@@ -14,6 +14,7 @@
 #   - Camera warm-up sequence to reduce initial lag
 #   - Optional known camera index to skip detection (faster startup)
 #   - Responsive web page design with CSS styling
+#   - Overlay label feature: displays "WNCC STEM Club" for 60 seconds every 15 minutes
 #
 #   This file is heavily commented for beginning Python programmers in a
 #   community college setting. It explains programming concepts, real-world
@@ -28,10 +29,11 @@
 #   - Network programming basics
 #   - Real-world troubleshooting and hardware limitations
 #   - Performance optimization techniques
+#   - Real-time image overlay and text rendering
 # ============================================================================
 
 
-# -------------------- IMPORTS (Libraries) -------------------- #
+# --------------------------- IMPORTS (Libraries) -------------------------- #
 # These are modules (libraries) that add extra features to Python
 
 import logging  # For recording error messages and debug info
@@ -48,6 +50,8 @@ from threading import (
     Thread,  # For running background tasks
 )  # For running multiple tasks simultaneously
 from typing import Optional  # For type hints
+
+from web_stream_page import PAGE
 
 # Import OpenCV library for camera control
 # Install: sudo apt install python3-opencv
@@ -97,59 +101,6 @@ logger.addHandler(console_handler)
 # Prevent propagation to avoid duplicate messages
 logger.propagate = False
 
-
-# ---------------------------- WEB PAGE HTML ------------------------------- #
-""" This is the HTML code for the web page for testing in a browser.
- It's a multi-line string (triple quotes) so you can write it like a document."""
-PAGE = """
-<html>
-<head>
-<title>USB Camera Streaming - Optimized</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-body { 
-    font-family: Arial, sans-serif; 
-    margin: 20px; 
-    background-color: #f0f0f0; 
-}
-.container { 
-    max-width: 800px; 
-    margin: 0 auto; 
-    background-color: white; 
-    padding: 20px; 
-    border-radius: 10px; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
-}
-.stream-img { 
-    max-width: 100%; 
-    height: auto; 
-    border: 2px solid #333; 
-    border-radius: 5px; 
-}
-.info { 
-    margin-top: 15px; 
-    padding: 10px; 
-    background-color: #e6f3ff; 
-    border-radius: 5px; 
-    font-size: 14px; 
-}
-</style>
-</head>
-<body>
-<div class="container">
-    <h1>USB Camera Streaming</h1>
-    <p>Live video feed from USB camera - Optimized for bandwidth</p>
-    <img src="stream.mjpg" class="stream-img" alt="Camera Stream"/>
-    <div class="info">
-        <strong>Stream Info:</strong><br>
-        Resolution: 640x480 | Quality: High | Frame Rate: Up to 15 FPS<br>
-        Optimized for fast loading and reduced bandwidth usage
-    </div>
-</div>
-</body>
-</html>
-"""
-
 # ------------------------ CONFIGURATION VARIABLES ------------------------- #
 # These are constants (values that don't change) that control how the camera behaves.
 # You can change these to adjust the video quality and frame rate.
@@ -157,6 +108,10 @@ body {
 FRAME_RATE = 10  # How many pictures per second we want the camera to take
 # Note: Some cameras may ignore this setting and use their own preferred rate.
 # This is normal hardware behavior - the camera will tell us what it's actually using.
+# Frame rate limiting for bandwidth control
+MAX_STREAM_FPS = (
+    10  # Maximum FPS to send to clients (independent of camera FPS)
+)
 
 VIDEO_WIDTH = 1280
 VIDEO_HEIGHT = 720
@@ -168,10 +123,19 @@ JPEG_QUALITY = 85  # Good balance between quality and bandwidth
 # Set to 0, 1, 2, etc. if you know your camera index, or None to auto-detect
 KNOWN_CAMERA_INDEX = 0
 
-# Frame rate limiting for bandwidth control
-MAX_STREAM_FPS = (
-    15  # Maximum FPS to send to clients (independent of camera FPS)
-)
+# Label overlay configuration
+ENABLE_LABEL_OVERLAY = True  # Set to False to completely disable label feature
+LABEL_TEXT = "WNCC STEM Club Meeting Thursday at 4 in C1"  # Text to display on video
+LABEL_CYCLE_MINUTES = 10  # Show label every X minutes
+LABEL_DURATION_SECONDS = 30  # Show label for X seconds each cycle
+LABEL_FONT_SCALE = 0.8  # Size of the label text
+# Background transparency (0.0 = transparent, 1.0 = opaque)
+LABEL_TRANSPARENCY = 0.7
+# Text transparency for overlays (0.0 = fully transparent, 1.0 = fully opaque)
+TEXT_TRANSPARENCY = 0.9
+# Text color for overlays (BGR)
+TEXT_COLOR = (0, 85, 204)  # Burnt orange in BGR for OpenCV
+
 
 
 # --------------------- MEDIA RELAY (FRAME BROADCASTER) -------------------- #
@@ -198,6 +162,11 @@ class MediaRelay:
         self.running = False
         self.cap = None
         self.capture_thread = None
+
+        # Label timing control (only initialize if label overlay is enabled)
+        if ENABLE_LABEL_OVERLAY:
+            self.label_start_time = time.time()  # When we started the current cycle
+            self.label_shown = False  # Track if label is currently being shown
 
     # ------------------------ START CAPTURE ------------------------------- #
     def start_capture(self, camera_index=0):
@@ -278,6 +247,70 @@ class MediaRelay:
                 # Try to read one frame from the camera
                 ret, frame = self.cap.read()
                 if ret:
+                    # Add WNCC STEM Club label timing logic (only if enabled)
+                    if ENABLE_LABEL_OVERLAY:
+                        current_cycle_time = current_time - self.label_start_time
+
+                        # Show label for configured duration every configured interval
+                        cycle_duration = LABEL_CYCLE_MINUTES * 60  # Convert minutes to seconds
+                        if current_cycle_time >= cycle_duration:  # Reset cycle
+                            self.label_start_time = current_time
+                            current_cycle_time = 0
+                            self.label_shown = False
+
+                        # Show label for first X seconds of each cycle
+                        show_label = current_cycle_time < LABEL_DURATION_SECONDS
+
+                        # Add overlay text if it's time to show it
+                        if show_label:
+                            # Add semi-transparent background for better text visibility
+                            overlay = frame.copy()
+
+                            # Calculate text size and position
+                            font = cv2.FONT_HERSHEY_SIMPLEX
+                            thickness = 2
+
+                            # Get text size to position it properly
+                            (text_width, text_height), baseline = cv2.getTextSize(
+                                LABEL_TEXT, font, LABEL_FONT_SCALE, thickness)
+
+                            # Position in bottom-left corner with some padding
+                            x = 20  # 20 pixels from left edge
+                            # 20 pixels from bottom edge
+                            y = frame.shape[0] - 20
+
+                            # Draw semi-transparent background rectangle
+                            cv2.rectangle(overlay,
+                                          (x - 10, y - text_height - 10),
+                                          (x + text_width + 10, y + 10),
+                                          (0, 0, 0), -1)  # Black background
+
+                            # Blend the overlay with the original frame for transparency
+                            cv2.addWeighted(
+                                overlay, LABEL_TRANSPARENCY, frame, 1 - LABEL_TRANSPARENCY, 0, frame)
+
+                            # Add label text using the configured text color and transparency
+                            if TEXT_TRANSPARENCY < 1.0:
+                                text_overlay = frame.copy()
+                                cv2.putText(text_overlay, LABEL_TEXT, (x, y), font,
+                                           LABEL_FONT_SCALE, TEXT_COLOR, thickness)
+                                cv2.addWeighted(text_overlay, TEXT_TRANSPARENCY, frame, 1 - TEXT_TRANSPARENCY, 0, frame)
+                            else:
+                                cv2.putText(frame, LABEL_TEXT, (x, y), font,
+                                           LABEL_FONT_SCALE, TEXT_COLOR, thickness)
+
+                            # Log when label appears (only once per state change)
+                            if not self.label_shown:
+                                logging.info(
+                                    f"[MediaRelay] Label '{LABEL_TEXT}' displayed for {LABEL_DURATION_SECONDS}s")
+                                self.label_shown = True
+                        else:
+                            # Log when label disappears (only once per state change)
+                            if self.label_shown:
+                                logging.info(
+                                    f"[MediaRelay] Label '{LABEL_TEXT}' hidden - next display in {LABEL_CYCLE_MINUTES} minutes")
+                                self.label_shown = False
+
                     # Convert the frame to JPEG format with controlled quality for web streaming
                     encode_params = [cv2.IMWRITE_JPEG_QUALITY, JPEG_QUALITY]
                     _, buffer = cv2.imencode(".jpg", frame, encode_params)
@@ -433,12 +466,12 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     daemon_threads = True
 
 
-# ==================== GLOBAL VARIABLES ========================== #
+# ======================= GLOBAL VARIABLES ================================= #
 # Global MediaRelay object that will be initialized in main()
 relay: Optional["MediaRelay"] = None
 
 
-# ==================== MAIN PROGRAM STARTS HERE ========================== #
+# ====================== MAIN PROGRAM STARTS HERE ========================== #
 # This is where the actual program execution begins.
 # Everything above this point was just defining classes and functions.
 # Now we use those classes to create and run our camera streaming server.

@@ -7,6 +7,7 @@ Detects available cameras, opens the first working one, and prints its actual se
 
 import cv2
 import logging
+import os
 
 # Setup logging to console only
 logging.basicConfig(

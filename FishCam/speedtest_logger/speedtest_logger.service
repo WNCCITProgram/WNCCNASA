@@ -1,0 +1,19 @@
+# systemctl --user daemon-reload
+# systemctl --user enable speedtest_logger
+# systemctl --user start web_stream
+# journalctl -u web_stream -f
+
+[Unit]
+Description=Speedtest Logger
+After=network-online.target sshd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/Code/speedtest_logger/speedtest_logger.py
+WorkingDirectory=/home/pi/Code/speedtest_logger
+Restart=on-failure
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target
