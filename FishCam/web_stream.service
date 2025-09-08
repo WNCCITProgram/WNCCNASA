@@ -1,7 +1,7 @@
-# sudo systemctl daemon-reload
-# sudo systemctl enable web_stream
-# sudo systemctl start web_stream
-# sudo journalctl -u web_stream -f
+# systemctl --user daemon-reload
+# systemctl --user enable web_stream
+# systemctl --user start web_stream
+# journalctl -u web_stream -f
 
 [Unit]
 Description=USB Camera Web Streaming Service (OpenCV MJPEG)
@@ -9,11 +9,12 @@ After=network-online.target sshd.service
 
 [Service]
 Type=simple
+ExecStart=/usr/bin/python3 /home/pi/Code/web_stream.py
+WorkingDirectory=/home/pi/Code
+Restart=on-failure
+RestartSec=10
 User=pi
 Group=pi
-ExecStart=/home/pi/Aquaponics/.venv/bin/python /home/pi/Aquaponics/web_stream.py
-WorkingDirectory=/home/pi/Aquaponics
-Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target

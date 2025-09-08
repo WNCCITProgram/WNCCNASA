@@ -8,19 +8,18 @@ with a slight delay. This smooths out connection problems and provides stable vi
 """
 import threading
 import time
-import queue
 import logging
 from collections import deque
-from typing import Optional, List
+from typing import Optional
 import requests
 from dataclasses import dataclass
 
 # ========== FRAME CACHE CONSTANTS ==========
 # These constants control how the frame caching system behaves
 
-DEFAULT_CACHE_DURATION = 30.0  # seconds - how long to keep frames in cache (like a DVR buffer)
-DEFAULT_SERVE_DELAY = 3.0       # seconds - delay before serving frames for stability (prevents stuttering)
-DEFAULT_FRAME_RATE = 10         # fps - target frame rate for output ( frames per second)
+DEFAULT_SERVE_DELAY = 2.0       # seconds - delay before serving frames for stability (prevents stuttering)
+DEFAULT_CACHE_DURATION = 15.0    # seconds - how long to keep frames in cache (like a DVR buffer)
+DEFAULT_FRAME_RATE = 15         # fps - target frame rate for output ( frames per second)
 MAX_BUFFER_SIZE = 4 * 1024 * 1024  # bytes - max buffer size to prevent memory bloat (4 MB)
 BUFFER_TRIM_SIZE = 1024 * 1024     # bytes - size to trim buffer to when it gets too large (1 MB)
 FETCH_CHUNK_SIZE = 4096            # bytes - chunk size for reading upstream (4 KB at a time)

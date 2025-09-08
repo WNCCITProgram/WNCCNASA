@@ -15,8 +15,8 @@ path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # Get the absolute path to this script's directory
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 LOG_DIR = os.path.join(SCRIPT_DIR, "logs")
-# Use base name without .log so rotated files become waitress_app.YYYY-MM-DD.log
-LOG_FILE = os.path.join(LOG_DIR, "waitress_app")
+# Use waitress_app.log as the base so rotated files are waitress_app.log, waitress_app.log.2025-08-19, etc.
+LOG_FILE = os.path.join(LOG_DIR, "waitress_app.log")
 
 # Create logs directory
 os.makedirs(LOG_DIR, exist_ok=True)
@@ -33,15 +33,15 @@ try:
     for handler in logger.handlers[:]:
         logger.removeHandler(handler)
     
-    # Use TimedRotatingFileHandler with the same format as main_app
+    # Use TimedRotatingFileHandler so rotated files are waitress_app.log, waitress_app.log.2025-08-19, etc.
     handler = logging.handlers.TimedRotatingFileHandler(
         LOG_FILE, when="midnight", interval=1, backupCount=7, encoding="utf-8"
     )
     
-    # Rotated name format: waitress_app.2025-08-19.log
-    handler.suffix = "%Y-%m-%d.log"
+    # Rotated name format: waitress_app.log.2025-08-19
+    handler.suffix = "%Y-%m-%d"
     import re
-    handler.extMatch = re.compile(r"^\d{4}-\d{2}-\d{2}\.log$")
+    handler.extMatch = re.compile(r"^\d{4}-\d{2}-\d{2}$")
     
     formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
     handler.setFormatter(formatter)

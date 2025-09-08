@@ -15,7 +15,7 @@ from frame_cache import FrameCache, DEFAULT_CACHE_DURATION, DEFAULT_SERVE_DELAY,
 # ========== CACHED RELAY CONSTANTS ==========
 # These settings control how the relay distributes video to web browsers
 
-CLIENT_QUEUE_SIZE = 50              # max frames each browser can have waiting (larger = more buffering)
+CLIENT_QUEUE_SIZE = 50             # max frames each browser can have waiting (larger = more buffering)
 STREAM_WORKER_SLEEP = 0.1          # seconds - how often to check for new frames when none available
 FRAME_INTERVAL = 1.0 / DEFAULT_FRAME_RATE  # seconds between frames (1/15 = 0.067s for 15 FPS)
 CLIENT_REMOVAL_TIMEOUT = 5         # seconds - how long to wait for threads to stop when shutting down

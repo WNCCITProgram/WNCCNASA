@@ -1,0 +1,75 @@
+{
+  "cameras": [
+    {
+      "index": 0,
+      "default": {
+        "width": 800,
+        "height": 600,
+        "fps": 20.0
+      },
+      "supported_resolutions": [
+        {
+          "width": 320,
+          "height": 240,
+          "fps": 30.0
+        },
+        {
+          "width": 640,
+          "height": 480,
+          "fps": 30.0
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "fps": 20.0
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "fps": 10.0
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "fps": 5.0
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "default": {
+        "width": 800,
+        "height": 600,
+        "fps": 20.0
+      },
+      "supported_resolutions": [
+        {
+          "width": 320,
+          "height": 240,
+          "fps": 20.0
+        },
+        {
+          "width": 640,
+          "height": 480,
+          "fps": 20.0
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "fps": 20.0
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "fps": 7.5
+        },
+        {
+          "width": 1600,
+          "height": 1200,
+          "fps": 5.0
+        }
+      ]
+    }
+  ],
+  "count": 2
+}

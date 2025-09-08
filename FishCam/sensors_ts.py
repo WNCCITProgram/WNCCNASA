@@ -190,7 +190,7 @@ def get_current_sensor_data_for_email(
                 if liquid_present == 1
                 else "Low" if liquid_present == 0 else "Unknown"
             ),
-            "pH": f"{ph_value:.2f}" if ph_value is not None else "No data",
+            "pH": f"{ph_value:.1f}" if ph_value is not None else "No data",
         }
 
         # Determine system status
@@ -429,7 +429,7 @@ def main():
                     logger.warning("Failed to read water temperature")
 
                 if current_ph is not None:
-                    logger.info(f"pH: {current_ph:.2f}")
+                    logger.info(f"pH: {current_ph:.1f}")
                 else:
                     logger.warning("Failed to read pH sensor")
 
@@ -540,7 +540,7 @@ def main():
                         )
                     if ph_readings:
                         logger.info(
-                            f"Avg pH: {avg_ph:.2f} ({len(ph_readings)} samples)"
+                            f"Avg pH: {avg_ph:.1f} ({len(ph_readings)} samples)"
                         )
 
                     # Send averaged data to ThingSpeak

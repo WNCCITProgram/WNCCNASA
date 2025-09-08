@@ -125,7 +125,9 @@ KNOWN_CAMERA_INDEX = 0
 
 # Label overlay configuration
 ENABLE_LABEL_OVERLAY = True  # Set to False to completely disable label feature
-LABEL_TEXT = "WNCC STEM Club Meeting Thursday at 4 in C1"  # Text to display on video
+LABEL_TEXT = (
+    "WNCC STEM Club Meeting Thursday at 4 in C1"  # Text to display on video
+)
 LABEL_CYCLE_MINUTES = 10  # Show label every X minutes
 LABEL_DURATION_SECONDS = 30  # Show label for X seconds each cycle
 LABEL_FONT_SCALE = 0.8  # Size of the label text
@@ -135,7 +137,6 @@ LABEL_TRANSPARENCY = 0.7
 TEXT_TRANSPARENCY = 0.9
 # Text color for overlays (BGR)
 TEXT_COLOR = (0, 85, 204)  # Burnt orange in BGR for OpenCV
-
 
 
 # --------------------- MEDIA RELAY (FRAME BROADCASTER) -------------------- #
@@ -165,7 +166,9 @@ class MediaRelay:
 
         # Label timing control (only initialize if label overlay is enabled)
         if ENABLE_LABEL_OVERLAY:
-            self.label_start_time = time.time()  # When we started the current cycle
+            self.label_start_time = (
+                time.time()
+            )  # When we started the current cycle
             self.label_shown = False  # Track if label is currently being shown
 
     # ------------------------ START CAPTURE ------------------------------- #
@@ -249,10 +252,14 @@ class MediaRelay:
                 if ret:
                     # Add WNCC STEM Club label timing logic (only if enabled)
                     if ENABLE_LABEL_OVERLAY:
-                        current_cycle_time = current_time - self.label_start_time
+                        current_cycle_time = (
+                            current_time - self.label_start_time
+                        )
 
                         # Show label for configured duration every configured interval
-                        cycle_duration = LABEL_CYCLE_MINUTES * 60  # Convert minutes to seconds
+                        cycle_duration = (
+                            LABEL_CYCLE_MINUTES * 60
+                        )  # Convert minutes to seconds
                         if current_cycle_time >= cycle_duration:  # Reset cycle
                             self.label_start_time = current_time
                             current_cycle_time = 0
@@ -271,8 +278,14 @@ class MediaRelay:
                             thickness = 2
 
                             # Get text size to position it properly
-                            (text_width, text_height), baseline = cv2.getTextSize(
-                                LABEL_TEXT, font, LABEL_FONT_SCALE, thickness)
+                            (text_width, text_height), baseline = (
+                                cv2.getTextSize(
+                                    LABEL_TEXT,
+                                    font,
+                                    LABEL_FONT_SCALE,
+                                    thickness,
+                                )
+                            )
 
                             # Position in bottom-left corner with some padding
                             x = 20  # 20 pixels from left edge
@@ -280,35 +293,67 @@ class MediaRelay:
                             y = frame.shape[0] - 20
 
                             # Draw semi-transparent background rectangle
-                            cv2.rectangle(overlay,
-                                          (x - 10, y - text_height - 10),
-                                          (x + text_width + 10, y + 10),
-                                          (0, 0, 0), -1)  # Black background
+                            cv2.rectangle(
+                                overlay,
+                                (x - 10, y - text_height - 10),
+                                (x + text_width + 10, y + 10),
+                                (0, 0, 0),
+                                -1,
+                            )  # Black background
 
                             # Blend the overlay with the original frame for transparency
                             cv2.addWeighted(
-                                overlay, LABEL_TRANSPARENCY, frame, 1 - LABEL_TRANSPARENCY, 0, frame)
+                                overlay,
+                                LABEL_TRANSPARENCY,
+                                frame,
+                                1 - LABEL_TRANSPARENCY,
+                                0,
+                                frame,
+                            )
 
                             # Add label text using the configured text color and transparency
                             if TEXT_TRANSPARENCY < 1.0:
                                 text_overlay = frame.copy()
-                                cv2.putText(text_overlay, LABEL_TEXT, (x, y), font,
-                                           LABEL_FONT_SCALE, TEXT_COLOR, thickness)
-                                cv2.addWeighted(text_overlay, TEXT_TRANSPARENCY, frame, 1 - TEXT_TRANSPARENCY, 0, frame)
+                                cv2.putText(
+                                    text_overlay,
+                                    LABEL_TEXT,
+                                    (x, y),
+                                    font,
+                                    LABEL_FONT_SCALE,
+                                    TEXT_COLOR,
+                                    thickness,
+                                )
+                                cv2.addWeighted(
+                                    text_overlay,
+                                    TEXT_TRANSPARENCY,
+                                    frame,
+                                    1 - TEXT_TRANSPARENCY,
+                                    0,
+                                    frame,
+                                )
                             else:
-                                cv2.putText(frame, LABEL_TEXT, (x, y), font,
-                                           LABEL_FONT_SCALE, TEXT_COLOR, thickness)
+                                cv2.putText(
+                                    frame,
+                                    LABEL_TEXT,
+                                    (x, y),
+                                    font,
+                                    LABEL_FONT_SCALE,
+                                    TEXT_COLOR,
+                                    thickness,
+                                )
 
                             # Log when label appears (only once per state change)
                             if not self.label_shown:
                                 logging.info(
-                                    f"[MediaRelay] Label '{LABEL_TEXT}' displayed for {LABEL_DURATION_SECONDS}s")
+                                    f"[MediaRelay] Label '{LABEL_TEXT}' displayed for {LABEL_DURATION_SECONDS}s"
+                                )
                                 self.label_shown = True
                         else:
                             # Log when label disappears (only once per state change)
                             if self.label_shown:
                                 logging.info(
-                                    f"[MediaRelay] Label '{LABEL_TEXT}' hidden - next display in {LABEL_CYCLE_MINUTES} minutes")
+                                    f"[MediaRelay] Label '{LABEL_TEXT}' hidden - next display in {LABEL_CYCLE_MINUTES} minutes"
+                                )
                                 self.label_shown = False
 
                     # Convert the frame to JPEG format with controlled quality for web streaming

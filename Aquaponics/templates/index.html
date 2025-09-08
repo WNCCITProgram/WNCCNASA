@@ -1,56 +1,68 @@
 {% extends "base.html"%}
-
 {% block content %}
-
 <div class="container">
-    <h1>🚀 WNCC STEM Club - Aquaponics System</h1>
+
+  <!-- Restored original intro text (kept existing content) -->
+  <div class="mb-4">
+    <h1 class="mb-2">🚀 WNCC STEM Club - Aquaponics System</h1>
     <p>The WNCC STEM Club meets every Thursday at 4 PM in Room C1.</p>
-    <!-- Live Stream Card -->
-    <div class="card">
-        <div class="card-header">
-            <h3>🐟 Live Fish Cam</h3>
-        </div>
-        <div class="card-body">
-            <p>Live stream from the WNCC STEM Club Aquaponics system located in the WNCC Biology Lab. Check out the fish
-                and plants thriving in our aquaponics setup!
-            </p>
+  </div>
 
-            <div class="text-center">
-                <div id="stream-container" class="stream-container">
-                    <div id="stream-loading" class="stream-loading">
-                        <div class="spinner"></div>
-                        <p>Connecting to live stream...</p>
-                    </div>
-                    <img id="stream" class="stream-video" src="{{ stream_url }}" alt="Fish Cam Live Stream">
-                    <div id="stream-error" class="stream-error" style="display: none;">
-                        <p>⚠️ Stream temporarily unavailable</p>
-                        <button id="retry-stream" class="btn btn-outline-light btn-sm">Retry Connection</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Fish Tank -->
+  <div class="card mb-4">
+    <div class="card-header">🐟 Fish Tank</div>
+    <div class="card-body">
+      <!-- Restored descriptive text -->
+      <p class="mb-3">Live stream from the Aquaponics system fish tank in the Pit (Student common area). Watch the
+        fish swimming in their habitat!</p>
+      <img id="fish-stream" src="{{ fish_stream_url }}&t={{ timestamp }}"
+        style="max-width:100%;border:2px solid #ff6b35;border-radius:6px" alt="Fish Tank Stream">
     </div>
+  </div>
 
-    <!-- Quick Links Card -->
-    <div class="card">
-        <div class="card-header">
-            <h3>📊 System Monitoring</h3>
-        </div>
-        <div class="card-body">
-            <p>Monitor the health and status of our aquaponics system through real-time sensor data.</p>
-            <div class="text-center">
-                <a href="{{ url_for('sensors') }}" class="btn btn-primary btn-lg">
-                    View Sensor Dashboard
-                </a>
-            </div>
-        </div>
+  <!-- Plants Bed -->
+  <div class="card mb-4">
+    <div class="card-header">🌱 Plant Bed</div>
+    <div class="card-body">
+      <!-- Restored descriptive text -->
+      <p class="mb-3">Live stream from the Aquaponics plant bed. See how the plants are growing with
+        nutrients from the fish waste!</p>
+      <img id="plants-stream" src="{{ plants_stream_url }}&t={{ timestamp }}"
+        style="max-width:100%;border:2px solid #0d6efd;border-radius:6px" alt="Plant Bed Stream">
     </div>
+  </div>
+
+  <!-- Restored System Monitoring card -->
+  <div class="card mb-4">
+    <div class="card-header">📊 System Monitoring</div>
+    <div class="card-body text-center">
+      <p>Monitor real-time sensor data for water quality, temperature, and environmental conditions.</p>
+      <a href="{{ url_for('sensors') }}" class="btn btn-primary btn-lg">View Sensor Dashboard</a>
+    </div>
+  </div>
+
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Existing lightweight watchdog (left unchanged)
 <script>
-    // Pass the stream URL to JavaScript
-    window.streamUrl = "{{ url_for('stream_proxy', host=host, port=port, path=path) }}";
-</script>
-<script src="{{ url_for('static', filename='js/stream.js') }}"></script>
+  (function () {
+    const cams = [
+      { id: 'fish-stream', base: '{{ fish_stream_url }}' },
+      { id: 'plants-stream', base: '{{ plants_stream_url }}' }
+    ];
+    function refresh(imgObj) {
+      const el = document.getElementById(imgObj.id);
+      if (!el) return;
+      el.src = imgObj.base + '&t=' + Date.now();
+    }
+    setInterval(() => {
+      cams.forEach(c => {
+        const el = document.getElementById(c.id);
+        if (el && el.complete && el.naturalWidth === 0) {
+          refresh(c);
+        }
+      });
+    }, 15000);
+  })();
+</script> -->
 {% endblock %}

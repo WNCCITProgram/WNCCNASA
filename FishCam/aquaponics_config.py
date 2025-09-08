@@ -20,15 +20,17 @@ SMTP_PORT = 587  # TLS port for Gmail
 EMAIL_TIMEOUT = 30  # Connection timeout in seconds
 
 # Default email settings (can be overridden)
-DEFAULT_SENDER_EMAIL = "Your gmail address"
-DEFAULT_SENDER_PASSWORD = (
-    "Your Gmail App Password"  # Use App Password, not regular password
-)
+DEFAULT_SENDER_EMAIL = "wnccrobotics@gmail.com"
+DEFAULT_SENDER_PASSWORD = "loyqlzkxisojeqsr"  # Use App Password, not regular password
 
 # Multiple recipients - add more email addresses here
 DEFAULT_RECIPIENT_EMAILS = [
-    "you@you.com",
-    "tech@wat.com",
+    "williamaloring@gmail.com",
+    "williamloring@hotmail.com",
+    "sarah.trook31@gmail.com",
+    "zakwest85@gmail.com",
+    "blackwelljakob22@gmail.com",
+    "arood2016@icloud.com,"
 ]
 
 # Email template constants
@@ -41,19 +43,17 @@ TRIM_PERCENT = 0.1  # Percentage to trim from each end for outlier removal (10%)
 # Sensor Thresholds for Alerts
 WATER_TEMP_MIN = 65.0  # Fahrenheit
 WATER_TEMP_MAX = 85.0  # Fahrenheit
-HUMIDITY_MIN = 40.0  # Percentage
-HUMIDITY_MAX = 80.0  # Percentage
+HUMIDITY_MIN = 40.0    # Percentage
+HUMIDITY_MAX = 80.0    # Percentage
 
 # System Configuration
-LOG_BACKUP_COUNT = 7  # Number of log files to keep
+LOG_BACKUP_COUNT = 7   # Number of log files to keep
 LOG_ROTATION = "midnight"  # When to rotate logs
 
 # Network Configuration
 THINGSPEAK_TIMEOUT = 30  # seconds
 RETRY_DELAY = 5  # seconds to wait before retrying failed operations
-RESTART_DELAY = (
-    600  # seconds to wait before system restart after critical error
-)
+RESTART_DELAY = 600  # seconds to wait before system restart after critical error
 
 # Default pH Value (when sensor not available)
 DEFAULT_PH = 7.0
