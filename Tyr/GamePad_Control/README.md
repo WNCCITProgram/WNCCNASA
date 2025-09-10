@@ -25,6 +25,8 @@
 
 ### Installing CircuitPython on Motor2040
 
+**NOTE:** If you are upgrading CircuitPython, backup your code.py file for each controller.
+
 1. **Download CircuitPython UF2 file**
    - Go to [CircuitPython.org downloads](https://circuitpython.org/board/pimoroni_motor2040/)
    - Download the latest stable `.uf2` file for Motor2040
