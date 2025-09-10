@@ -30,4 +30,6 @@ We modified the electronics from this BOM.
 
 2 - [Motor2040 - Quad Motor Controllers](https://shop.pimoroni.com/products/motor-2040?variant=39884997853267)
 
-- We choose this as each controller supports 4 motors, we control the left and right side with separate motor controllers. This controller offers PWM and PID support and is programmed in CircuitPython.
+- We chose the Motor2040 as each controller supports 4 motors
+  - Control the left and right side with separate motor controllers.
+  - This controller offers PWM and PID support and is programmed in CircuitPython.
