@@ -5,42 +5,67 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.12.0/baguetteBox.min.css">
 
 <div class="container">
-    <h1>📷 Aquaponics Photo Gallery</h1>
+    <h1>📷 STEM Club Photo Gallery</h1>
     <p>Explore photos of our aquaponics system, STEM Club activities, and student projects!</p>
-    
+
     <!-- Gallery instructions -->
     <div class="alert alert-info mb-4" role="alert">
-        <i class="bi bi-info-circle"></i> 
-        💡 <strong>Tip:</strong> Click any photo to open the gallery viewer with navigation arrows and keyboard controls!
+        <i class="bi bi-info-circle"></i>
+        💡 <strong>Tip:</strong> Click any photo to open the gallery viewer with navigation arrows and keyboard
+        controls!
     </div>
 
     <div class="card mb-4">
         <div class="card-header">
-            <h3>🌱 System & Club Photos</h3>
+            <h3>🌱 STEM Club Photos</h3>
         </div>
         <div class="card-body">
-            <div class="gallery row gx-3" id="photo-gallery">
-                <div class="col-md-4 mb-3">
+            <div class="gallery gallery-flow" id="photo-gallery">
+                <div class="gallery-item">
                     <div class="position-relative">
                         <a href="{{ url_for('static', filename='img/aquaponics_cycle.jpg') }}"
-                           title="Diagram of the aquaponics cycle showing water, fish, and plants.">
+                            title="Diagram of the aquaponics cycle showing water, fish, and plants.">
                             <img src="{{ url_for('static', filename='img/aquaponics_cycle.jpg') }}"
-                                 class="img-fluid rounded shadow-sm gallery-image" alt="Aquaponics Cycle Diagram">
+                                class="rounded shadow-sm gallery-image" alt="Aquaponics Cycle Diagram">
                         </a>
-                        <!-- Gallery indicator overlay -->
                         <div class="gallery-indicator">
                             <span class="badge bg-primary">🔍 Click to view</span>
                         </div>
                     </div>
                     <div class="mt-2"><small>The aquaponics cycle showing water, fish, and plants.</small></div>
                 </div>
-
-                <div class="col-md-4 mb-3">
+                <div class="gallery-item">
+                    <div class="position-relative">
+                        <a href="{{ url_for('static', filename='img/stem_club_visit_with_president.jpg') }}"
+                            title="The aquaponics system in its new location in the Pit. (08/27/2025)">
+                            <img src="{{ url_for('static', filename='img/stem_club_visit_with_president.jpg') }}"
+                                class="rounded shadow-sm gallery-image" alt="Aquaponics System Installed in Pit">
+                        </a>
+                        <div class="gallery-indicator">
+                            <span class="badge bg-primary">🔍 Click to view</span>
+                        </div>
+                    </div>
+                    <div class="mt-2"><small>The STEM Club thanking President Dart for his support of the Aquaponics project move to the Pit with a 3D printed Cougar. (09/08/2025)</small></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="position-relative">
+                        <a href="{{ url_for('static', filename='img/visiting_with_president_dart.jpg') }}"
+                            title="The aquaponics system in its new location in the Pit. (08/27/2025)">
+                            <img src="{{ url_for('static', filename='img/visiting_with_president_dart.jpg') }}"
+                                class="rounded shadow-sm gallery-image" alt="Visiting with President Dart">
+                        </a>
+                        <div class="gallery-indicator">
+                            <span class="badge bg-primary">🔍 Click to view</span>
+                        </div>
+                    </div>
+                    <div class="mt-2"><small>The STEM Club visiting with President Dart about the Aquaponics Project. (09/08/2025)</small></div>
+                </div>
+                <div class="gallery-item">
                     <div class="position-relative">
                         <a href="{{ url_for('static', filename='img/aquaponics_move_to_pit.jpg') }}"
-                           title="STEM Club members moving the aquaponics system to the Pit area. (08/27/2025)">
+                            title="STEM Club members moving the aquaponics system to the Pit area. (08/27/2025)">
                             <img src="{{ url_for('static', filename='img/aquaponics_move_to_pit.jpg') }}"
-                                 class="img-fluid rounded shadow-sm gallery-image" alt="Moving Aquaponics System to Pit">
+                                class="rounded shadow-sm gallery-image" alt="Moving Aquaponics System to Pit">
                         </a>
                         <div class="gallery-indicator">
                             <span class="badge bg-primary">🔍 Click to view</span>
@@ -48,13 +73,12 @@
                     </div>
                     <div class="mt-2"><small>STEM Club members moving the aquaponics system to the Pit area. (08/27/2025)</small></div>
                 </div>
-
-                <div class="col-md-4 mb-3">
+                <div class="gallery-item">
                     <div class="position-relative">
                         <a href="{{ url_for('static', filename='img/aquaponics_system_in_pit.jpg') }}"
-                           title="The aquaponics system fully installed and running in the Pit. After a year, we have a stable nitrogen cycle with healthy fish and plants. (08/27/2025)">
+                            title="The aquaponics system fully installed and running in the Pit. After a year, we have a stable nitrogen cycle with healthy fish and plants. (08/27/2025)">
                             <img src="{{ url_for('static', filename='img/aquaponics_system_in_pit.jpg') }}"
-                                 class="img-fluid rounded shadow-sm gallery-image" alt="Aquaponics System Installed in Pit">
+                                class="rounded shadow-sm gallery-image" alt="Aquaponics System Installed in Pit">
                         </a>
                         <div class="gallery-indicator">
                             <span class="badge bg-primary">🔍 Click to view</span>
@@ -62,23 +86,40 @@
                     </div>
                     <div class="mt-2"><small>The aquaponics system fully installed and running in the Pit. After a year, we have a stable nitrogen cycle with healthy fish and plants. (08/27/2025)</small></div>
                 </div>
+                <div class="gallery-item">
+                    <div class="position-relative">
+                        <a href="{{ url_for('static', filename='img/moving_aquaponics.jpg') }}"
+                            title="The aquaponics system in its new location in the Pit. (08/27/2025)">
+                            <img src="{{ url_for('static', filename='img/moving_aquaponics.jpg') }}"
+                                class="rounded shadow-sm gallery-image" alt="Aquaponics System Installed in Pit">
+                        </a>
+                        <div class="gallery-indicator">
+                            <span class="badge bg-primary">🔍 Click to view</span>
+                        </div>
+                    </div>
+                    <div class="mt-2"><small>The aquaponics system being moved out of the Biology lab. (08/27/2025)</small></div>
+                </div>
             </div>
 
-            <div class="mt-2" style="font-size: 1rem;">Want to contribute your photos? Contact the STEM Club advisor!</div>
-        </div>
-    </div>
+
+
+</div>
+
+<div class="mt-2 text-white">Want to contribute your photos? Contact the STEM Club advisors!</div>
+</div>
+</div>
 </div>
 
 <!-- BaguetteBox JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.12.0/baguetteBox.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    baguetteBox.run('.gallery', {
-        animation: 'slideIn',
-        captions: function(element) {
-            return element.getAttribute('title') || element.querySelector('img').getAttribute('alt');
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        baguetteBox.run('.gallery', {
+            animation: 'slideIn',
+            captions: function (element) {
+                return element.getAttribute('title') || element.querySelector('img').getAttribute('alt');
+            }
+        });
     });
-});
 </script>
 {% endblock %}

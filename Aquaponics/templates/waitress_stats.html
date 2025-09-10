@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Server & Stream Statistics</h1>
+<p>This page polls the JSON endpoints and shows current threading and camera usage.</p>
+
+<div style="margin: .5rem 0;">
+  <button id="refreshBtn">Refresh Now</button>
+  <label style="margin-left:1rem;">
+    Auto-refresh:
+    <select id="intervalSel">
+      <option value="2000">2s</option>
+      <option value="5000" selected>5s</option>
+      <option value="10000">10s</option>
+      <option value="0">Off</option>
+    </select>
+  </label>
+</div>
+
+<pre id="statsBox" style="
+  background:#111;
+  color:#0f0;
+  padding:1rem;
+  border-radius:6px;
+  overflow:auto;
+  max-height:70vh;
+  font-size:14px;
+  line-height:1.3;
+"></pre>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function fetchJSON(url){
+  const r = await fetch(url, {cache:'no-store'});
+  if(!r.ok) throw new Error(r.status + ' ' + r.statusText);
+  return r.json();
+}
+
+async function loadStats(){
+  const box = document.getElementById('statsBox');
+  box.textContent = 'Loading...';
+  try{
+    const [serverInfo, waitressInfo] = await Promise.all([
+      fetchJSON("{{ url_for('server_info') }}"),
+      fetchJSON("{{ url_for('waitress_info') }}")
+    ]);
+    const lines = [];
+    lines.push("=== SERVER INFO ===");
+    lines.push(JSON.stringify(serverInfo, null, 2));
+    lines.push("");
+    lines.push("=== WAITRESS / STREAMING ===");
+    lines.push(JSON.stringify(waitressInfo, null, 2));
+    box.textContent = lines.join("\n");
+  }catch(e){
+    box.textContent = 'Error: ' + e;
+  }
+}
+
+let timer = null;
+function setAuto(ms){
+  if(timer){ clearInterval(timer); timer = null; }
+  if(ms > 0){
+    timer = setInterval(loadStats, ms);
+  }
+}
+
+document.getElementById('refreshBtn').addEventListener('click', loadStats);
+document.getElementById('intervalSel').addEventListener('change', e => {
+  setAuto(parseInt(e.target.value, 10));
+});
+
+loadStats();
+setAuto(5000);
+</script>
+{%

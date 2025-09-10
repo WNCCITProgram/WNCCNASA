@@ -19,12 +19,10 @@ import logging
 import logging.handlers
 import threading
 import time
-import queue
-from typing import Dict, Union
+from typing import Dict
 
 # Local modules that handle pulling frames from upstream cameras
-from cached_relay import CachedMediaRelay   # Relay with small frame cache
-from media_relay import MediaRelay          # Basic relay (not used here but available)
+from broadcast_relay import BroadcastCamera
 
 # ---------------------------------------------------------------------------
 # LOGGING SETUP
@@ -88,33 +86,18 @@ MAX_CONSECUTIVE_TIMEOUTS = 10    # If client sees this many empty waits, disconn
 QUEUE_TIMEOUT = 15               # Seconds each client waits for a frame before retry
 
 # Dictionary that holds active relay objects keyed by the full upstream URL
-_media_relay: Dict[str, Union[MediaRelay, CachedMediaRelay]] = {}
-# Lock prevents race conditions if multiple users connect at the same time
-_relay_lock = threading.Lock()
+_broadcast_cameras: Dict[str, BroadcastCamera] = {}
+_broadcast_lock = threading.Lock()
 
-# ---------------------------------------------------------------------------
-# RELAY FACTORY
-# ---------------------------------------------------------------------------
-def get_media_relay(stream_url: str) -> Union[MediaRelay, CachedMediaRelay]:
-    """
-    Return an existing relay for a camera URL, or create a new one.
-    A relay:
-      - Opens the upstream MJPEG stream once
-      - Distributes frames to all connected browser clients
-    We use CachedMediaRelay for a small buffer that helps absorb short drops.
-    """
-    with _relay_lock:
-        relay = _media_relay.get(stream_url)
-        if relay is None:
-            relay = CachedMediaRelay(
-                upstream_url=stream_url,
-                cache_duration=WIRELESS_CACHE_DURATION,
-                serve_delay=WIRELESS_SERVE_DELAY,
-            )
-            relay.start()  # Starts its background thread pulling frames
-            _media_relay[stream_url] = relay
-            logging.info(f"Relay created: {stream_url}")
-        return relay
+def get_broadcast_camera(stream_url: str) -> BroadcastCamera:
+    with _broadcast_lock:
+        cam = _broadcast_cameras.get(stream_url)
+        if cam is None:
+            cam = BroadcastCamera(stream_url)
+            cam.start()
+            _broadcast_cameras[stream_url] = cam
+            logging.info(f"[BroadcastFactory] Created {stream_url}")
+        return cam
 
 # ---------------------------------------------------------------------------
 # ROUTES: WEB PAGES
@@ -153,6 +136,12 @@ def index():
         timestamp=int(time.time())  # basic cache-buster
     )
 
+# Champions page route
+@app.route("/aquaponics/champions")
+def champions():
+    """Page recognizing Aquaponics Champions."""
+    return render_template("champions.html")
+
 @app.route("/aquaponics/about")
 def about():
     """Static About page."""
@@ -172,6 +161,11 @@ def sensors():
 def photos():
     """Photo gallery page."""
     return render_template("photos.html")
+
+@app.route("/aquaponics/stats")
+def stats_page():
+    """HTML page that displays waitress/server streaming statistics."""
+    return render_template("waitress_stats.html")
 
 # ---------------------------------------------------------------------------
 # STREAM PROXY ENDPOINT
@@ -196,60 +190,57 @@ def stream_proxy():
     # Build complete upstream URL
     stream_url = f"http://{host}:{port}{path}"
 
-    # Acquire (or create) relay
-    relay = get_media_relay(stream_url)
-
-    # Each client gets its own queue of incoming data chunks (frames)
-    client_queue = relay.add_client()
+    cam = get_broadcast_camera(stream_url)
+    cam.add_client()
 
     def generate():
-        """
-        Generator that yields multipart MJPEG chunks to the browser.
-        It blocks waiting for frame data and stops if the relay stops or times out.
-        """
-        # Warm-up: wait until the relay has at least one frame or timeout
+        WARMUP_TIMEOUT = 10
+        QUEUE_TIMEOUT = 8
+        MAX_TIMEOUTS = 5
         waited = 0.0
-        while relay.last_frame is None and waited < WARMUP_TIMEOUT:
-            time.sleep(0.1)
-            waited += 0.1
-
-        consecutive_timeouts = 0
-
-        try:
-            while True:
-                try:
-                    # Wait for next frame chunk from relay
-                    chunk = client_queue.get(timeout=QUEUE_TIMEOUT)
-                    consecutive_timeouts = 0  # Reset because we received data
-
-                    # None signals relay failure or termination
-                    if chunk is None:
+        # Wait for first frame
+        while cam.last_jpeg is None and waited < WARMUP_TIMEOUT and cam.running:
+            with cam._cond:
+                cam._cond.wait(timeout=0.2)
+            waited += 0.2
+        if cam.last_jpeg is None:
+            return
+        last_sent = -1
+        timeouts = 0
+        while cam.running:
+            with cam._cond:
+                signaled = cam._cond.wait_for(
+                    lambda: not cam.running or cam.frame_id != last_sent,
+                    timeout=QUEUE_TIMEOUT
+                )
+                if not signaled:
+                    timeouts += 1
+                    if timeouts >= MAX_TIMEOUTS or not cam.running:
                         break
-
-                    # Send raw frame bytes (already formatted by relay)
-                    yield chunk
-
-                except queue.Empty:
-                    # No frame arrived in QUEUE_TIMEOUT seconds
-                    consecutive_timeouts += 1
-                    # If relay died or too many misses, end stream
-                    if not relay.running or consecutive_timeouts >= MAX_CONSECUTIVE_TIMEOUTS:
-                        break
-        finally:
-            # Remove this client from relay to free resources
-            relay.remove_client(client_queue)
-
-    # Return streaming HTTP response
-    return Response(
-        generate(),
-        mimetype=relay.content_type,  # Usually multipart/x-mixed-replace; boundary=frame
-        headers={
-            # Prevent caching so the browser keeps requesting live frames
-            "Cache-Control": "no-cache, no-store, must-revalidate",
-            "Pragma": "no-cache",
-            "Expires": "0",
-        },
-    )
+                    continue
+                timeouts = 0
+                if not cam.running or cam.last_jpeg is None:
+                    continue
+                jpeg = cam.last_jpeg
+                last_sent = cam.frame_id
+            yield (
+                b"--frame\r\n"
+                b"Content-Type: image/jpeg\r\n"
+                b"Content-Length: " + str(len(jpeg)).encode() + b"\r\n\r\n" +
+                jpeg + b"\r\n"
+            )
+            # Optional tiny heartbeat every N frames (no-op comment line)
+            # if last_sent % 120 == 0: yield b"#\r\n"
+    resp = Response(generate(), mimetype="multipart/x-mixed-replace; boundary=frame",
+                    headers={
+                        "Cache-Control": "no-cache, no-store, must-revalidate",
+                        "Pragma": "no-cache",
+                        "Expires": "0",
+                    })
+    def _close(response):
+        cam.remove_client()
+        return response
+    return resp
 
 @app.route("/aquaponics/health")
 def health():
@@ -258,6 +249,48 @@ def health():
     Returns JSON if the app is alive.
     """
     return {"status": "ok"}
+
+@app.route("/aquaponics/server_info")
+def server_info():
+    import threading
+    return {
+        "server": request.environ.get("SERVER_SOFTWARE", "unknown"),
+        "active_threads": len(threading.enumerate()),
+        "broadcast_cameras": list(getattr(globals(), "_broadcast_cameras", {}).keys())
+    }
+
+@app.route("/aquaponics/waitress_info")
+def waitress_info():
+    """
+    Runtime diagnostics focused on Waitress + streaming load.
+    Gives a quick view of thread usage and camera client counts.
+    """
+    import threading, platform, sys, time
+    all_threads = threading.enumerate()
+    thread_names = [t.name for t in all_threads]
+    waitress_threads = [n for n in thread_names if "waitress" in n.lower()]
+    camera_stats = {}
+    with _broadcast_lock:
+        for url, cam in _broadcast_cameras.items():
+            with cam._cond:
+                camera_stats[url] = {
+                    "clients": cam._clients,
+                    "frame_id": cam.frame_id,
+                    "has_frame": cam.last_jpeg is not None,
+                    "running": cam.running,
+                }
+
+    return {
+        "server_software": request.environ.get("SERVER_SOFTWARE", "unknown"),
+        "python": sys.version.split()[0],
+        "platform": platform.platform(),
+        "utc_epoch": int(time.time()),
+        "threads_total": len(all_threads),
+        "threads_waitress": len(waitress_threads),
+        "waitress_thread_names_sample": waitress_threads[:10],
+        "threads_other": len(all_threads) - len(waitress_threads),
+        "cameras": camera_stats
+    }
 
 # ---------------------------------------------------------------------------
 # TEMPLATE CONTEXT
@@ -277,11 +310,11 @@ def cleanup_relays():
     Called at shutdown to stop all relay threads cleanly.
     Prevents orphan background threads after server exit.
     """
-    with _relay_lock:
-        for relay in _media_relay.values():
-            relay.stop()
-        _media_relay.clear()
-    logging.info("Relays cleaned up")
+    with _broadcast_lock:
+        for c in _broadcast_cameras.values():
+            c.stop()
+        _broadcast_cameras.clear()
+    logging.info("Broadcast relays cleaned up")
 
 # ---------------------------------------------------------------------------
 # MAIN ENTRY POINT
@@ -289,8 +322,6 @@ def cleanup_relays():
 if __name__ == "__main__":
     import atexit
     atexit.register(cleanup_relays)
-
-    print("Aquaponics streaming server running.")
-    print("Access at: http://localhost:5000/aquaponics")
-
-    # debug=False for production-like behavior
+    print("Development mode ONLY (use waitress_app.py in production).")
+    # DO NOT use debug=True in production behind IIS
+    app.run(host="127.0.0.1", port=5000, debug=False)

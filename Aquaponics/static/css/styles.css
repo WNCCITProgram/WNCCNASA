@@ -207,6 +207,29 @@ a:hover {
 .gallery-image {
     cursor: pointer;                        /* Show pointer cursor (indicates clickable) */
     transition: transform 0.2s ease;       /* Smooth scaling animation */
+    max-width: 352px;                       /* 10% bigger than 320px */
+    width: 100%;                            /* Fill container up to max */
+    height: auto;                           /* Keep original aspect ratio */
+    object-fit: contain;                    /* Show full image, no crop */
+    display: block;                         /* Remove inline gap */
+    margin: 0 16px 16px 0;                  /* Space between images */
+}
+
+/* Gallery flow: images left-to-right, text wraps */
+.gallery-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 16px;
+    justify-content: flex-start;
+}
+
+.gallery-flow .gallery-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    max-width: 352px;
 }
 
 /* Hover effect for gallery images - slight zoom */

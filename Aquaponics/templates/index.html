@@ -43,26 +43,4 @@
 
 </div>
 
-<!-- Existing lightweight watchdog (left unchanged)
-<script>
-  (function () {
-    const cams = [
-      { id: 'fish-stream', base: '{{ fish_stream_url }}' },
-      { id: 'plants-stream', base: '{{ plants_stream_url }}' }
-    ];
-    function refresh(imgObj) {
-      const el = document.getElementById(imgObj.id);
-      if (!el) return;
-      el.src = imgObj.base + '&t=' + Date.now();
-    }
-    setInterval(() => {
-      cams.forEach(c => {
-        const el = document.getElementById(c.id);
-        if (el && el.complete && el.naturalWidth === 0) {
-          refresh(c);
-        }
-      });
-    }, 15000);
-  })();
-</script> -->
 {% endblock %}

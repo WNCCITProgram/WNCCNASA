@@ -21,7 +21,7 @@ LOG_FILE = os.path.join(LOG_DIR, "waitress_app.log")
 # Create logs directory
 os.makedirs(LOG_DIR, exist_ok=True)
 
-# Import Flask app FIRST (this might reconfigure logging)
+THREADS = 64
 
 # NOW set up logging AFTER main_app import to override its configuration
 try:
@@ -79,7 +79,7 @@ def main():
             app,
             host=host,
             port=port,
-            threads=4,
+            threads=THREADS,
             connection_limit=1000,
         )
     except Exception as e:
