@@ -1,4 +1,5 @@
 # Import necessary libraries
+# pip install pyPS4Controller
 from pyPS4Controller.controller import Controller  # For handling PS4 controller inputs
 import smbus  # For I2C communication
 from adafruit_servokit import ServoKit  # For controlling servo motors

@@ -1,0 +1,3 @@
+pyPS4Controller
+smbus
+adafruit_servokit

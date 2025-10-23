@@ -76,6 +76,10 @@
 - O button to switch the Rover mode on/off
 - Δ button to switch between One/Two sticks control
 
+## Import Libraries for tyr_controller.py
+
+```pip install -r requirements.txt```
+
 ## Importing Code
 
 - Importing old controller code to Pi
