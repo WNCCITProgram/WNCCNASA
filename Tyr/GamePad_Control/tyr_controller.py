@@ -1,6 +1,9 @@
 #!./venv/bin/python
+# pip install pyPS4Controller
 from pyPS4Controller.controller import Controller
+# pip install smbus
 import smbus
+# pip install adafruit-circuitpython-servokit
 from adafruit_servokit import ServoKit
 from time import sleep
 from math import tan, atan, degrees, radians

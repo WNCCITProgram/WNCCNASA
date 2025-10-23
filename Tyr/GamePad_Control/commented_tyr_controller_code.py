@@ -1,7 +1,9 @@
 # Import necessary libraries
 # pip install pyPS4Controller
 from pyPS4Controller.controller import Controller  # For handling PS4 controller inputs
+# pip install smbus
 import smbus  # For I2C communication
+# pip install adafruit-circuitpython-servokit
 from adafruit_servokit import ServoKit  # For controlling servo motors
 from time import sleep  # For adding delays
 from math import pi, tan, atan, degrees, radians  # For mathematical calculations
